@@ -1,0 +1,29 @@
+// Custom Theming for Angular Material
+// For more information: https://material.angular.io/guide/theming
+@import "~@angular/material/theming";
+// Plus imports for other components in your app.
+
+// Include the common styles for Angular Material. We include this here so that you only
+// have to load a single css file for Angular Material in your app.
+// Be sure that you only ever include this mixin once!
+@include mat-core();
+
+// Define the palettes for your theme using the Material Design palettes available in palette.scss
+// (imported above). For each palette, you can optionally specify a default, lighter, and darker
+// hue. Available color palettes: https://material.io/design/color/
+$DANAutoParts-primary: mat-palette($mat-light-blue);
+$DANAutoParts-accent: mat-palette($mat-light-green);
+$DANAutoParts-warn: mat-palette($mat-red);
+
+$DANAutoParts-theme: mat-light-theme($DANAutoParts-primary, $DANAutoParts-accent, $DANAutoParts-warn);
+@include angular-material-theme($DANAutoParts-theme);
+
+//for dark theme
+$DANAutoParts-primary-dark: mat-palette($mat-orange);
+$DANAutoParts-accent-dark: mat-palette($mat-yellow);
+$DANAutoParts-warn-dark: mat-palette($mat-red);
+
+$DANAutoParts-theme-dark: mat-dark-theme($DANAutoParts-primary-dark, $DANAutoParts-accent-dark, $DANAutoParts-warn-dark);
+.dark-theme-mode {
+    @include angular-material-theme($DANAutoParts-theme-dark);
+}
