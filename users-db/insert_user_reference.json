@@ -1,0 +1,12 @@
+[
+    {  
+        "username": "nickmiller32",
+        "password": "password'",
+        "access": "admin"
+    },
+    {
+        "temp": "tempuser",
+        "password": "temp",
+        "access": "reg"
+    }
+]

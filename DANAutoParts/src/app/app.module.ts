@@ -23,14 +23,16 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { FormsModule } from '@angular/forms';
 import { MatProgressBarModule } from '@angular/material/progress-bar'
 import { InterceptorService } from './loader/interceptor.service';
-import { MatProgressSpinnerModule } from '@angular/material/progress-spinner'
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { AdminComponent } from './admin/admin.component'
 
 @NgModule({
   declarations: [
     AppComponent,
     NavComponent,
     HomeComponent,
-    NotifierComponent
+    NotifierComponent,
+    AdminComponent
   ],
   imports: [
     BrowserModule,
