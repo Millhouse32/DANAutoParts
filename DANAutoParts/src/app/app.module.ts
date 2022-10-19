@@ -29,6 +29,10 @@ import { LoginComponent } from './login/login.component';
 import { MatStepper, MatStepperModule } from '@angular/material/stepper';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { SearchComponent } from './search/search.component';
+import { MatInputModule } from '@angular/material/input';
+import { MatTableModule } from '@angular/material/table';
+import { MatSelectModule } from '@angular/material/select';
 
 @NgModule({
   declarations: [
@@ -37,7 +41,8 @@ import { MatFormFieldModule } from '@angular/material/form-field';
     HomeComponent,
     NotifierComponent,
     AdminComponent,
-    LoginComponent
+    LoginComponent,
+    SearchComponent
   ],
   imports: [
     BrowserModule,
@@ -61,7 +66,10 @@ import { MatFormFieldModule } from '@angular/material/form-field';
     MatStepperModule,
     FormsModule,
     ReactiveFormsModule,
-    MatFormFieldModule
+    MatFormFieldModule,
+    MatInputModule,
+    MatTableModule,
+    MatSelectModule
   ],
   providers: [
     { provide:HTTP_INTERCEPTORS, useClass:InterceptorService, multi:true }
