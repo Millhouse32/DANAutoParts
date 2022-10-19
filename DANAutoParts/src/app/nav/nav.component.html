@@ -27,6 +27,11 @@
       </button>
       <span>DAN Auto Parts</span>
       <span style="flex:auto;"></span>
+      <div style="padding-right: 20px;">
+      <button mat-button (click)="toSourceCode()">
+        <mat-icon>code</mat-icon>
+      </button>
+      </div>
       <mat-slide-toggle [(ngModel)]="isDarkTheme" labelPosition="before" (change)="storeThemeSelection()">
         <mat-icon>bedtime</mat-icon>
       </mat-slide-toggle>

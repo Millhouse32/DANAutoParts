@@ -29,4 +29,8 @@ export class NavComponent {
     localStorage.setItem('theme', this.isDarkTheme ? "Dark" : "Light");
   }
 
+  toSourceCode(){
+    window.open('https://github.com/Millhouse32/DANAutoParts', '_blank');
+  }
+
 }
