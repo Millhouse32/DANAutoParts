@@ -19,8 +19,8 @@ $DANAutoParts-theme: mat-light-theme($DANAutoParts-primary, $DANAutoParts-accent
 @include angular-material-theme($DANAutoParts-theme);
 
 //for dark theme
-$DANAutoParts-primary-dark: mat-palette($mat-orange);
-$DANAutoParts-accent-dark: mat-palette($mat-yellow);
+$DANAutoParts-primary-dark: mat-palette($mat-grey);
+$DANAutoParts-accent-dark: mat-palette($mat-blue-grey);
 $DANAutoParts-warn-dark: mat-palette($mat-red);
 
 $DANAutoParts-theme-dark: mat-dark-theme($DANAutoParts-primary-dark, $DANAutoParts-accent-dark, $DANAutoParts-warn-dark);
