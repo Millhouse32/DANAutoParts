@@ -20,11 +20,15 @@ import { HttpClient, HttpClientModule, HttpInterceptor, HTTP_INTERCEPTORS } from
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { NotifierComponent } from './notifier/notifier.component';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
-import { FormsModule } from '@angular/forms';
 import { MatProgressBarModule } from '@angular/material/progress-bar'
 import { InterceptorService } from './loader/interceptor.service';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { AdminComponent } from './admin/admin.component'
+import { FormBuilder, Validators } from '@angular/forms';
+import { LoginComponent } from './login/login.component';
+import { MatStepper, MatStepperModule } from '@angular/material/stepper';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MatFormFieldModule } from '@angular/material/form-field';
 
 @NgModule({
   declarations: [
@@ -32,7 +36,8 @@ import { AdminComponent } from './admin/admin.component'
     NavComponent,
     HomeComponent,
     NotifierComponent,
-    AdminComponent
+    AdminComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
@@ -52,7 +57,11 @@ import { AdminComponent } from './admin/admin.component'
     MatSlideToggleModule,
     FormsModule,
     MatProgressBarModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    MatStepperModule,
+    FormsModule,
+    ReactiveFormsModule,
+    MatFormFieldModule
   ],
   providers: [
     { provide:HTTP_INTERCEPTORS, useClass:InterceptorService, multi:true }
