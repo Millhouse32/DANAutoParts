@@ -33,6 +33,7 @@ import { SearchComponent } from './search/search.component';
 import { MatInputModule } from '@angular/material/input';
 import { MatTableModule } from '@angular/material/table';
 import { MatSelectModule } from '@angular/material/select';
+import { CartComponent } from './cart/cart.component';
 
 @NgModule({
   declarations: [
@@ -42,7 +43,8 @@ import { MatSelectModule } from '@angular/material/select';
     NotifierComponent,
     AdminComponent,
     LoginComponent,
-    SearchComponent
+    SearchComponent,
+    CartComponent
   ],
   imports: [
     BrowserModule,

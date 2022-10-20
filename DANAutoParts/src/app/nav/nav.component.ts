@@ -3,6 +3,7 @@ import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Observable } from 'rxjs';
 import { map, shareReplay } from 'rxjs/operators';
 import { LoaderService } from '../loader/loader.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-nav',
@@ -19,7 +20,8 @@ export class NavComponent {
     );
 
   constructor(private breakpointObserver: BreakpointObserver,
-  public loaderService:LoaderService) {}
+  public loaderService:LoaderService,
+  private router: Router) {}
 
   ngOnInit() {
     this.isDarkTheme = localStorage.getItem('theme')=== "Dark" ? true:false;
@@ -31,6 +33,10 @@ export class NavComponent {
 
   toSourceCode(){
     window.open('https://github.com/Millhouse32/DANAutoParts', '_blank');
+  }
+
+  toCart(){
+    this.router.navigateByUrl('/cart');
   }
 
 }

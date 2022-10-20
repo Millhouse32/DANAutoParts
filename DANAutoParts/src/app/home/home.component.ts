@@ -4,6 +4,7 @@ import { Breakpoints, BreakpointObserver } from '@angular/cdk/layout';
 import { Observable } from 'rxjs';
 import { AppService } from '../app.service';
 import { NotifierService } from '../notifier.service';
+import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-home',
@@ -15,6 +16,9 @@ export class HomeComponent {
   cards:any = [];
   cardsForHandset = [];
   cardsForWeb = [];
+
+  url: string = "https://angular.io/api/router/RouterLink";
+  urlSafe: SafeResourceUrl = 0;
   
   isHandset:boolean = false;
   isHandsetObserver:Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset).pipe(
@@ -28,9 +32,11 @@ export class HomeComponent {
 
   constructor(private breakpointObserver: BreakpointObserver,
     public appService:AppService,
-    private notifierService:NotifierService) {}
+    private notifierService:NotifierService,
+    public sanitizer: DomSanitizer) {}
 
   ngOnInit() {
+    this.urlSafe= this.sanitizer.bypassSecurityTrustResourceUrl(this.url);
     this.isHandsetObserver.subscribe(currentObserverValue => {
       this.isHandset = currentObserverValue;
       this.loadCards();
