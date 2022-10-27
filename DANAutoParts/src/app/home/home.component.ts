@@ -64,4 +64,8 @@ export class HomeComponent {
   getImage(imageName: string) :string {
     return 'url(' + 'http://localhost:3000/images/' + imageName + '.jpg' + ')';
   }
+
+  getUrl(url: string){
+    return this.sanitizer.bypassSecurityTrustResourceUrl(url);
+  }
 }

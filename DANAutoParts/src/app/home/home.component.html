@@ -2,15 +2,20 @@
   <h1 class="mat-h1">Welcome!</h1>
   <mat-grid-list cols="2" rowHeight="350px">
     <mat-grid-tile *ngFor="let card of cards" [colspan]="card.cols" [rowspan]="card.rows">
-      <mat-card class="dashboard-card card-image" [style.background-image]="getImage(card.imageName)">
+    <mat-card *ngIf="card.contentType=='image'" class="dashboard-card card-image" [style.background-image]="getImage(card.imageName)">
         <mat-card-header class="mat-app-background card-title">
           <mat-card-title>
             {{card.title}}
           </mat-card-title>
         </mat-card-header>
-        <div *ngIf="card.title == 'Test 1'">
-          <iframe width="100%" height="100%" frameBorder="0" [src]="urlSafe"></iframe>
-        </div>
+    </mat-card>
+      <mat-card *ngIf="card.contentType == 'website'" class="dashboard-card">
+        <mat-card-header class="mat-app-background card-title">
+          <mat-card-title>
+            {{card.title}}
+          </mat-card-title>
+        </mat-card-header>
+          <iframe width="100%" height="90%" frameBorder="0" [src]="getUrl(card.content)"></iframe>
       </mat-card>
     </mat-grid-tile>
   </mat-grid-list>

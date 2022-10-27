@@ -4,7 +4,7 @@ var mongodb = require('mongodb');
 var connected = false;
 var db = null;
 
-mongodb.MongoClient.connect('mongodb://76.189.175.178:27017', { useUnifiedTopology: true }).then(connection=>{
+mongodb.MongoClient.connect('mongodb://localhost:27017', { useUnifiedTopology: true }).then(connection=>{
     connected = true;
     db = connection.db('DANAutoParts');
     console.log("DB Connection Successful!");
@@ -18,16 +18,18 @@ async function queryCardsCollection() {
 
         let jsonResponse = {
             "handsetCards": [],
-            "webCards": []
+            "webCards": [],
         };
 
-        const cardsCollectionArray = await db.collection('Cards').find().toArray();
+        const cardsCollectionArray = await db.collection('cards').find().toArray();
         cardsCollectionArray.forEach(element => {
             let handsetElement = {}
             handsetElement['imageName'] = element['imageName'];
             handsetElement['title'] = element['title'];
             handsetElement['rows'] = element['handsetRows'];
             handsetElement['cols'] = element['handsetCols'];
+            handsetElement['content'] = element['content'];
+            handsetElement['contentType'] = element['contentype'];
             jsonResponse.handsetCards.push(handsetElement);
 
             let webElement = {};
@@ -35,6 +37,8 @@ async function queryCardsCollection() {
             webElement['title'] = element['title'];
             webElement['rows'] = element['webRows'];
             webElement['cols'] = element['webCols'];
+            webElement['content'] = element['content'];
+            webElement['contentType'] = element['contentype'];
             jsonResponse.webCards.push(webElement);
         })
         return jsonResponse;
