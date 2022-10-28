@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { webSocket } from 'rxjs/webSocket';
 
 @Component({
   selector: 'app-admin',
@@ -7,9 +8,19 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AdminComponent implements OnInit {
 
-  constructor() { }
+  constructor() { 
+
+  }
 
   ngOnInit(): void {
+  }
+
+  onSend(){
+    const connection = webSocket('ws://localhost:9292');
+
+    connection.subscribe();
+
+    connection.next({tablename: 'hello world'});
   }
 
 }
