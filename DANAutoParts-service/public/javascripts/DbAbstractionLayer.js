@@ -48,4 +48,18 @@ async function queryCardsCollection() {
     }
 }
 
+// async function queryCarsCollection() {
+//     if (connected) {
+//         let jsonResposne = {
+//             cardata: []
+//         };
+//         const carsCollectionArray = await db.collection('cars').find().toArray();
+//         carsCollectionArray.forEach(element => {
+//             let carElement = {}
+//             carElement['']
+//         })
+//     }
+
+// }
+
 module.exports = { queryCardsCollection };
