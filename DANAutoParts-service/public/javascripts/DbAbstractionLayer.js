@@ -1,18 +1,30 @@
 const { json } = require('express');
-var mongodb = require('mongodb');
+var mysql = require('mysql');
 
 var connected = false;
 var db = null;
+var response = [];
 
-mongodb.MongoClient.connect('mongodb://localhost:27017', { useUnifiedTopology: true }).then(connection=>{
+var connection = mysql.createConnection({
+    host     : '76.189.175.178',
+    port     : '65323',
+    database : 'danautoparts',
+    user     : 'root',
+    password : 'DANAutoParts!',
+});
+
+connection.connect(function(err) {
+    if (err) {
+        console.error('Error connecting: ' + err.stack);
+        return;
+    }
+
+    console.log('Connected as id ' + connection.threadId);
     connected = true;
-    db = connection.db('DANAutoParts');
-    console.log("DB Connection Successful!");
-}).catch(error=> {
-    console.log("Error in connection to DB");
 });
 
 async function queryCardsCollection() {
+
     if (connected) {
         // get data from db
 
@@ -21,31 +33,47 @@ async function queryCardsCollection() {
             "webCards": [],
         };
 
-        const cardsCollectionArray = await db.collection('cards').find().toArray();
-        cardsCollectionArray.forEach(element => {
-            let handsetElement = {}
-            handsetElement['imageName'] = element['imageName'];
-            handsetElement['title'] = element['title'];
-            handsetElement['rows'] = element['handsetRows'];
-            handsetElement['cols'] = element['handsetCols'];
-            handsetElement['content'] = element['content'];
-            handsetElement['contentType'] = element['contentype'];
-            jsonResponse.handsetCards.push(handsetElement);
+        jsonResponse = await new Promise (function(resolve, reject) {
+            connection.query("select * from cards", function(err, rows){
+          if(err) {
+            throw err;
+          } else {
+            setValue(rows);
 
-            let webElement = {};
-            webElement['imageName'] = element['imageName'];
-            webElement['title'] = element['title'];
-            webElement['rows'] = element['webRows'];
-            webElement['cols'] = element['webCols'];
-            webElement['content'] = element['content'];
-            webElement['contentType'] = element['contentype'];
-            jsonResponse.webCards.push(webElement);
-        })
+            var temp = rows;
+            for (var i = 0; i < temp.length; i++) {
+                let handsetElement = {};
+                handsetElement['imageName'] = temp[i]['imageName'];
+                handsetElement['title'] = temp[i]['title'];
+                handsetElement['rows'] = temp[i]['handsetRows'];
+                handsetElement['cols'] = temp[i]['handsetCols'];
+                handsetElement['content'] = temp[i]['content'];
+                handsetElement['contentType'] = temp[i]['contentype'];
+                jsonResponse.handsetCards.push(handsetElement);
+
+                let webElement = {};
+                webElement['imageName'] = temp[i]['imageName'];
+                webElement['title'] = temp[i]['title'];
+                webElement['rows'] = temp[i]['webRows'];
+                webElement['cols'] = temp[i]['webCols'];
+                webElement['content'] = temp[i]['content'];
+                webElement['contentType'] = temp[i]['contentype'];
+                jsonResponse.webCards.push(webElement);
+            }
+            resolve(jsonResponse);     
+          }
+        });
+    });
         return jsonResponse;
     }
     else {
         return null;
     }
+}
+
+function setValue(value) {
+  response = value;
+  //console.log(response);
 }
 
 module.exports = { queryCardsCollection };
