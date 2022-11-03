@@ -7,9 +7,9 @@
     <mat-nav-list>
       <a mat-list-item routerLink="/home"><mat-icon>home</mat-icon> Home</a>
       <a mat-list-item routerLink="/search"><mat-icon>search</mat-icon> Search</a>
-      <a mat-list-item routerLink="/signup"><mat-icon>account_circle</mat-icon> Sign Up</a>
-      <a mat-list-item routerLink="/login"><mat-icon>account_circle</mat-icon> Login</a>
-      <a mat-list-item routerLink="/admin"><mat-icon>supervised_user_circle</mat-icon> Admin</a>
+      <a mat-list-item (click)="openModal('SignUp')"><mat-icon>account_circle</mat-icon> Sign Up</a>
+      <a mat-list-item (click)="openModal('login')"><mat-icon>account_circle</mat-icon> Login</a>
+      <a *ngIf="false" mat-list-item routerLink="/admin"><mat-icon>supervised_user_circle</mat-icon> Admin</a>
     </mat-nav-list>
   </mat-sidenav>
   <mat-sidenav-content>
@@ -42,6 +42,30 @@
         <mat-icon>bedtime</mat-icon>
       </mat-slide-toggle>
     </mat-toolbar>
+
+
+		<jw-modal id="login">
+			<div style="text-align: center;">
+			<h1 style="margin-bottom: 20px;"> Login</h1>
+			<p>Email: <input type="text" [(ngModel)]="email" placeholder="email" /></p>
+			<p>Password: <input id="pass" type="password" [(ngModel)]="password" placeholder="password"/></p>
+			<button  style="position: absolute; top: 0; right: 0; background-color: white; border: none" (click)="closeModal('login');">X</button>
+			<button class="button-21"(click)="login();">Login</button>
+			</div>
+		</jw-modal>
+
+	  <jw-modal id ="SignUp"> 
+			<div class = "modal-wrapper" style="text-align: center;">
+			<h1>Sign Up</h1>
+			<p>First name: <input type="text" [(ngModel)]="firstname" placeholder="first name"/></p>
+			<p>Last name: <input type="text" [(ngModel)]="lastname" placeholder="last name"/></p>
+			<p>Email: <input type="text" [(ngModel)]="email" placeholder="Email"/></p>
+			<p>Password: <input type="password" [(ngModel)]="password" placeholder="password"/></p>
+			<p>Confirm Password: <input type="password" [(ngModel)]="confirmPassword" placeholder="confirm password" /></p>
+			<button  style="position: absolute; top: 0; right: 0; background-color: white; border: none" (click)="closeModal('SignUp');">X</button>
+			<button class="button-21"(click)="signUp();">Sign Up</button>
+			</div>
+		</jw-modal>
 
     <router-outlet></router-outlet>
  
