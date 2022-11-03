@@ -64,9 +64,11 @@ async function queryCardsCollection() {
           }
         });
     });
+        connection.end();
         return jsonResponse;
     }
     else {
+        connection.end();
         return null;
     }
 }

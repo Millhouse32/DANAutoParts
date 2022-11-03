@@ -12,4 +12,8 @@ export class AppService {
   getWelcome():Observable<any> {
     return this.httpClient.get('http://localhost:3000/welcome/');
   }
+
+  AddUser(body: any):Observable<any> {
+    return this.httpClient.post('http://localhost:3000/AddUser/', body);
+  }
 }
