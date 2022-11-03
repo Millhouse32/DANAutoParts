@@ -1,0 +1,27 @@
+.test {
+  margin-left: 100px;
+}
+
+.form-container{
+    text-align: center;
+  margin-left: 400px;
+  width: 50%;
+  padding: 50px;
+}
+
+.form-field{
+    width: 280px;
+    display: block;
+
+}
+
+#button {
+  text-align: center;
+  padding-left: 100px;
+}
+
+.form-class{
+  margin-left: 400px;
+  width: 50%;
+  padding: 50px;
+}
