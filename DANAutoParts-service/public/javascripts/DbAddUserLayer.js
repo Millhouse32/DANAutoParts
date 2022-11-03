@@ -32,7 +32,5 @@ async function queryAddUser(email, firstname, lastname, password) {
             }
             console.log(results[0]);
         });
-
-        connection.end();
     }
 }
