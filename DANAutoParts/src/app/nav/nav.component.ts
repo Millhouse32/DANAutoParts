@@ -6,6 +6,7 @@ import { LoaderService } from '../loader/loader.service';
 import { Router } from '@angular/router';
 import { AppComponent } from 'src/app/app.component';
 import { ModalService } from 'src/app/_modal';
+import { emit } from 'process';
 
 @Component({
   selector: 'app-nav',
@@ -24,8 +25,9 @@ export class NavComponent {
   firstname:string = '';
   lastname:string = '';
   confirmPassword:string = '';
+  
 
-
+  isAdmin: boolean = false;
   loggedIn: boolean = false;
 
   isDarkTheme:boolean = false;
@@ -42,6 +44,7 @@ export class NavComponent {
   private modalService: ModalService) {}
 
   ngOnInit() {
+    this.isAdmin = localStorage.getItem('isAdmin') == "true" ? true : false;
     this.isDarkTheme = localStorage.getItem('theme')=== "Dark" ? true:false;
     this.appCom.isAuthObs.subscribe(loggedIn => this.loggedIn = loggedIn);
   }
@@ -77,11 +80,22 @@ closeModal(id: string) {
 }
 
 login() {
-
+  this.isAdmin = true;
+  localStorage.setItem("isAdmin", "true");
+  this.loggedIn = true;
+  localStorage.setItem("loggedIn", "true");
+  this.getAuthStatusChange.emit(true);
+  console.log(this.email);
+  this.closeModal("login");
+  
 }
 
 signUp() {
-
+  while(this.password != this.confirmPassword) {
+    alert("Passwords do not match!");
+    this.password = "";
+    this.confirmPassword = "";
+  }
 }
 
 }
