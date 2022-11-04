@@ -29,20 +29,24 @@ async function queryAddUser(email, firstname, lastname, password) {
     if (connected) {
         // attempt to add user
 
-        let sql = 'CALL AddUser(' + email + ', ' + firstname + ', ' + lastname + ', ' + password + ')';
-        connection.query(sql, function(err, rows) {
-            if (error) {
-                return console.error(error.message);
-            }
-            console.log(rows);
+        let jsonResponse = { };
+        jsonResponse = await new Promise (function(resolve, reject) {
+            let sql = 'CALL AddUser(?,?,?,?)';
+            connection.query(sql, [email, firstname, lastname, password], function(err, rows){
+                if (err) {
+                    console.log(err);
+                    throw err;
+                }
+                else {
+                    jsonResponse = rows[0];
+                    resolve(jsonResponse);
+                }
+            });
         });
+        return jsonResponse;
     }
     else {
-        console.log("Data received");
-        console.log(email);
-        console.log(firstname);
-        console.log(lastname);
-        console.log(password);
+        return null;
     }
 }
 

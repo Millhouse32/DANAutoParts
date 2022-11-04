@@ -120,11 +120,9 @@ signUp() {
       "password" : this.password
     };
 
-    console.log(body);
-
     this.appService.AddUser(body).subscribe(
     resposne => {
-
+      console.log(resposne);
 
     },
     error => {

@@ -6,7 +6,12 @@ var router = express.Router();
 router.post('/', function(req, res, next) {
 
     dbAddUserLayer.queryAddUser(req["body"]["email"], req["body"]["firstname"], 
-    req["body"]["lastname"], req["body"]["password"]);
+    req["body"]["lastname"], req["body"]["password"]).then(response=>{
+        console.log(response);
+        res.json(response);
+    }).catch(error=>{
+        res.status(500).json({});
+    });
 });
 
 module.exports = router;

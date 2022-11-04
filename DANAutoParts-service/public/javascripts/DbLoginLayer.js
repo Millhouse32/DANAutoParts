@@ -31,6 +31,7 @@ async function queryLogin(email, password) {
             let sql = 'CALL LogIn(?,?)';
             connection.query(sql, [email, password], function(err, rows){
                 if (err){
+                    console.log(err);
                     throw err;
                 }
                 else {

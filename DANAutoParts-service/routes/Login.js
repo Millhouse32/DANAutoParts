@@ -11,8 +11,6 @@ router.post ('/', function(req, res, next){
       }).catch(error=>{
         res.status(500).json({});
       });
-
-    
 });
 
 
