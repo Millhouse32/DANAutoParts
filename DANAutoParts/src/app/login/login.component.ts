@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { AppService } from '../app.service';
 
 @Component({
   selector: 'app-login',
@@ -12,7 +13,8 @@ export class LoginComponent implements OnInit {
   emailRegx = /^(([^<>+()\[\]\\.,;:\s@"-#$%&=]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,3}))$/;
 
   constructor(
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    public appService:AppService
   ) { }
 
   ngOnInit() {
@@ -26,7 +28,19 @@ export class LoginComponent implements OnInit {
     if (!this.loginForm.valid) {
       return;
     }
-    console.log(this.loginForm.value);
+    var body = {
+      "email" : this.loginForm.value["email"],
+      "password" : this.loginForm.value["password"]
+    };
+    this.appService.Login(body).subscribe( response => {
+      console.log(response);
+      localStorage.setItem('firstname', response[0]["firstname"]);
+    },
+    error => {
+      console.log(error);
+    });
+
+    
   }
 
 }

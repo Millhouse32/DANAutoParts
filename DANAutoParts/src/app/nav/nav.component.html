@@ -8,7 +8,7 @@
       <a mat-list-item routerLink="/home" [state]="{data: firstname}"><mat-icon>home</mat-icon> Home</a>
       <a mat-list-item routerLink="/search"><mat-icon>search</mat-icon> Search</a>
       <a mat-list-item (click)="openModal('SignUp')"><mat-icon>account_circle</mat-icon> Sign Up</a>
-      <a mat-list-item (click)="openModal('login')"><mat-icon>account_circle</mat-icon> Login</a>
+      <a mat-list-item routerLink="/login"><mat-icon>account_circle</mat-icon> Login</a>
       <a *ngIf="isAdmin" mat-list-item routerLink="/admin"><mat-icon>supervised_user_circle</mat-icon> Admin</a>
     </mat-nav-list>
   </mat-sidenav>
