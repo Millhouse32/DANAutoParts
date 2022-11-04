@@ -13,7 +13,7 @@ export class AppService {
     return this.httpClient.get('http://localhost:3000/welcome/');
   }
 
-  getCars():Observable<any> {
-    return this.httpClient.get('http://localhost:3000/cars/');
+  AddUser(body: any):Observable<any> {
+    return this.httpClient.post('http://localhost:3000/AddUser/', body);
   }
 }
