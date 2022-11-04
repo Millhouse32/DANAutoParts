@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { map, throwIfEmpty } from 'rxjs/operators';
 import { Breakpoints, BreakpointObserver } from '@angular/cdk/layout';
 import { Observable } from 'rxjs';
@@ -16,6 +16,9 @@ export class HomeComponent {
   cards:any = [];
   cardsForHandset = [];
   cardsForWeb = [];
+  firstname:any = "";
+
+  @Input() firstnameFromNav: any;
 
   url: string = "https://angular.io/api/router/RouterLink";
   urlSafe: SafeResourceUrl = 0;
@@ -40,6 +43,7 @@ export class HomeComponent {
     this.isHandsetObserver.subscribe(currentObserverValue => {
       this.isHandset = currentObserverValue;
       this.loadCards();
+      this.firstname = localStorage.getItem('firstname');
     });
 
     this.appService.getWelcome().subscribe(
@@ -55,6 +59,7 @@ export class HomeComponent {
          this.notifierService.showNotification('There was an error in receiving data from server! Please try again later!', 'OK', 'error');
       }
     );
+    console.log("hello" + history.state.data);
   }
 
   loadCards() {

@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { AnyCatcher } from 'rxjs/internal/AnyCatcher';
 
 @Injectable({
@@ -21,4 +21,7 @@ export class AppService {
   Login(body: any):Observable<any> {
     return this.httpClient.post('http://localhost:3000/Login/', body);
   }
+
+  public passFirstName = new BehaviorSubject<any>("");
+  readonly passFirstNames$ = this.passFirstName.asObservable();
 }

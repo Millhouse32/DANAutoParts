@@ -21,6 +21,8 @@ export class AppComponent {
 
   receiveFromChild:string = "";
 
+  firstnameFromNav: any;
+
   GetUser(newUser:string) {
     this.receiveFromChild = newUser;
   }
@@ -30,5 +32,9 @@ export class AppComponent {
         localStorage.setItem("loggedIn", "true");
       }
       this.loggedIn = status;
+  }
+
+  forwardToHome($event:any) {
+    this.firstnameFromNav = $event;
   }
 }

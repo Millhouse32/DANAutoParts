@@ -21,6 +21,7 @@ export class NavComponent {
 
 
   @Output() OutputToParent = new EventEmitter<any>();
+  @Output() firstnameToHome = new EventEmitter<any>();
 
   email:string = '';
   password:string = '';
@@ -45,7 +46,11 @@ export class NavComponent {
   public appCom: AppComponent,
   private modalService: ModalService,
   public appService:AppService,
-  private notifierService:NotifierService) {}
+  private notifierService:NotifierService) {
+    appService.passFirstNames$.subscribe(val=> {
+      console.log(val + "FROM NAV!");
+    })
+  }
 
   ngOnInit() {
     this.isAdmin = localStorage.getItem('isAdmin') == "true" ? true : false;
@@ -99,11 +104,12 @@ login() {
 
   this.appService.Login(body).subscribe( response => {
     console.log(response);
+    this.firstnameToHome.emit(response[0]["firstname"]);
+    localStorage.setItem('firstname', response[0]["firstname"]);
   },
   error => {
     console.log(error);
   });
-  
 }
 
 signUp() {
