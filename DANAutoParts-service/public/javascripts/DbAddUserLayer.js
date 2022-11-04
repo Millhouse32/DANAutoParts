@@ -23,16 +23,18 @@ connection.connect(function(err) {
     connected = true;
 });
 
+
+
 async function queryAddUser(email, firstname, lastname, password) {
     if (connected) {
         // attempt to add user
 
-        let sql = 'CALL AddUser(?)'
-        connection.query(sql, true, (error, result, email, firstname, lastname, password) => {
+        let sql = 'CALL AddUser(' + email + ', ' + firstname + ', ' + lastname + ', ' + password + ')';
+        connection.query(sql, function(err, rows) {
             if (error) {
                 return console.error(error.message);
             }
-            console.log(results[0]);
+            console.log(rows);
         });
     }
     else {

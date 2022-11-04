@@ -91,7 +91,18 @@ login() {
   localStorage.setItem("loggedIn", "true");
   this.getAuthStatusChange.emit(true);
   console.log(this.email);
-  this.closeModal("login");
+  
+  var body = {
+    "email" : this.email,
+    "password" : this.password
+  };
+
+  this.appService.Login(body).subscribe( response => {
+    console.log(response);
+  },
+  error => {
+    console.log(error);
+  });
   
 }
 
