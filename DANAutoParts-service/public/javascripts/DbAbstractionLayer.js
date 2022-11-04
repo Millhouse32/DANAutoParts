@@ -36,7 +36,7 @@ async function queryCardsCollection() {
         jsonResponse = await new Promise (function(resolve, reject) {
             connection.query("CALL GetCards()", function(err, rows){
           if(err) {
-            throw err;
+            console.log(err);
           } else {
             setValue(rows);
 

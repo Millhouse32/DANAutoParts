@@ -32,7 +32,6 @@ async function queryLogin(email, password) {
             connection.query(sql, [email, password], function(err, rows){
                 if (err){
                     console.log(err);
-                    throw err;
                 }
                 else {
                     jsonResponse = rows[0];

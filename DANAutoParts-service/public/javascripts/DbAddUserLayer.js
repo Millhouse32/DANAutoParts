@@ -35,7 +35,8 @@ async function queryAddUser(email, firstname, lastname, password) {
             connection.query(sql, [email, firstname, lastname, password], function(err, rows){
                 if (err) {
                     console.log(err);
-                    throw err;
+                    jsonResponse = {"error":"user already exists!"};
+                    resolve(jsonResponse);
                 }
                 else {
                     jsonResponse = rows[0];
