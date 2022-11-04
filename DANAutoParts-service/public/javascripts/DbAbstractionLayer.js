@@ -34,30 +34,30 @@ async function queryCardsCollection() {
         };
 
         jsonResponse = await new Promise (function(resolve, reject) {
-            connection.query("select * from cards", function(err, rows){
+            connection.query("CALL GetCards()", function(err, rows){
           if(err) {
             throw err;
           } else {
             setValue(rows);
 
             var temp = rows;
-            for (var i = 0; i < temp.length; i++) {
+            for (var i = 0; i < temp[0].length; i++) {
                 let handsetElement = {};
-                handsetElement['imageName'] = temp[i]['imageName'];
-                handsetElement['title'] = temp[i]['title'];
-                handsetElement['rows'] = temp[i]['handsetRows'];
-                handsetElement['cols'] = temp[i]['handsetCols'];
-                handsetElement['content'] = temp[i]['content'];
-                handsetElement['contentType'] = temp[i]['contentype'];
+                handsetElement['imageName'] = temp[0][i]['imageName'];
+                handsetElement['title'] = temp[0][i]['title'];
+                handsetElement['rows'] = temp[0][i]['handsetRows'];
+                handsetElement['cols'] = temp[0][i]['handsetCols'];
+                handsetElement['content'] = temp[0][i]['content'];
+                handsetElement['contentType'] = temp[0][i]['contentype'];
                 jsonResponse.handsetCards.push(handsetElement);
 
                 let webElement = {};
-                webElement['imageName'] = temp[i]['imageName'];
-                webElement['title'] = temp[i]['title'];
-                webElement['rows'] = temp[i]['webRows'];
-                webElement['cols'] = temp[i]['webCols'];
-                webElement['content'] = temp[i]['content'];
-                webElement['contentType'] = temp[i]['contentype'];
+                webElement['imageName'] = temp[0][i]['imageName'];
+                webElement['title'] = temp[0][i]['title'];
+                webElement['rows'] = temp[0][i]['webRows'];
+                webElement['cols'] = temp[0][i]['webCols'];
+                webElement['content'] = temp[0][i]['content'];
+                webElement['contentType'] = temp[0][i]['contentype'];
                 jsonResponse.webCards.push(webElement);
             }
             resolve(jsonResponse);     
