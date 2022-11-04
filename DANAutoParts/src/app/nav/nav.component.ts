@@ -7,6 +7,8 @@ import { Router } from '@angular/router';
 import { AppComponent } from 'src/app/app.component';
 import { ModalService } from 'src/app/_modal';
 import { emit } from 'process';
+import { AppService } from '../app.service';
+import { NotifierService } from '../notifier.service';
 
 @Component({
   selector: 'app-nav',
@@ -41,10 +43,13 @@ export class NavComponent {
   public loaderService:LoaderService,
   private router: Router,
   public appCom: AppComponent,
-  private modalService: ModalService) {}
+  private modalService: ModalService,
+  public appService:AppService,
+  private notifierService:NotifierService) {}
 
   ngOnInit() {
     this.isAdmin = localStorage.getItem('isAdmin') == "true" ? true : false;
+    this.loggedIn = localStorage.getItem('loggedIn') == "true" ? true : false;
     this.isDarkTheme = localStorage.getItem('theme')=== "Dark" ? true:false;
     this.appCom.isAuthObs.subscribe(loggedIn => this.loggedIn = loggedIn);
   }
@@ -96,6 +101,24 @@ signUp() {
     this.password = "";
     this.confirmPassword = "";
   }
+
+    var body = {
+      "firstname" : this.firstname,
+      "lastname" : this.lastname,
+      "email" : this.email,
+      "password" : this.password
+    };
+
+    console.log(body);
+
+    this.appService.AddUser(body).subscribe(
+    resposne => {
+
+
+    },
+    error => {
+
+    });
 }
 
 }
