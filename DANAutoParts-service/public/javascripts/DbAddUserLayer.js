@@ -39,7 +39,7 @@ async function queryAddUser(email, firstname, lastname, password) {
                     resolve(jsonResponse);
                 }
                 else {
-                    jsonResponse = rows[0];
+                    jsonResponse = {"success": "user created!"};
                     resolve(jsonResponse);
                 }
             });

@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { AppService } from '../app.service';
 
 @Component({
   selector: 'app-sign-up',
@@ -11,7 +13,9 @@ export class SignUpComponent implements OnInit {
   emailRegx = /^(([^<>+()\[\]\\.,;:\s@"-#$%&=]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,3}))$/;
 
   constructor(
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    public appService: AppService,
+    private router: Router
   ) { }
 
   ngOnInit() {
@@ -28,5 +32,19 @@ export class SignUpComponent implements OnInit {
       return;
     }
     console.log(this.loginForm.value);
-  }
+    this.appService.AddUser(this.loginForm.value).subscribe( response => {
+      console.log(response);
+      if (response["error"] == null) {
+        alert('User created!');
+        this.router.navigate(['login']);
+      }
+      else {
+        alert('User with that email already exists!');
+        location.reload();
+      }
+    },
+    error => {
+      console.log(error);
+    });
+}
 }
