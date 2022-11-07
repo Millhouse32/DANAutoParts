@@ -38,7 +38,7 @@ export class HomeComponent {
     private notifierService:NotifierService,
     public sanitizer: DomSanitizer) {
       appService.passFirstNames$.subscribe(val=> {
-        this.firstname = val.charAt(0).toUpperCase() + val.slice(1);
+        this.firstname = val;
         console.log(val);
       })
     }
@@ -50,6 +50,7 @@ export class HomeComponent {
       this.loadCards();
 
     });
+    this.firstname = localStorage.getItem('firstname');
 
     this.appService.getWelcome().subscribe(
       resposne => {

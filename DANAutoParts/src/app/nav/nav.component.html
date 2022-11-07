@@ -10,7 +10,7 @@
       <a mat-list-item (click)="openModal('SignUp')"><mat-icon>account_circle</mat-icon> Sign Up</a>
       <a mat-list-item routerLink="/login"><mat-icon>account_circle</mat-icon> Login</a>
       <a *ngIf="isAdmin" mat-list-item routerLink="/admin"><mat-icon>supervised_user_circle</mat-icon> Admin</a>
-      <a mat-list-item (click)="logout()"><mat-icon>exit_to_app</mat-icon> Logout</a>
+      <a *ngIf="loggedIn" mat-list-item (click)="logout()"><mat-icon>exit_to_app</mat-icon> Logout</a>
     </mat-nav-list>
   </mat-sidenav>
   <mat-sidenav-content>
@@ -43,17 +43,6 @@
         <mat-icon>bedtime</mat-icon>
       </mat-slide-toggle>
     </mat-toolbar>
-
-
-		<jw-modal id="login">
-			<div style="text-align: center;">
-			<h1 style="margin-bottom: 20px;"> Login</h1>
-			<p>Email: <input type="text" [(ngModel)]="email" placeholder="email" /></p>
-			<p>Password: <input id="pass" type="password" [(ngModel)]="password" placeholder="password"/></p>
-			<button  style="position: absolute; top: 0; right: 0; background-color: white; border: none" (click)="closeModal('login');">X</button>
-			<button class="button-21"(click)="login();">Login</button>
-			</div>
-		</jw-modal>
 
 	  <jw-modal id ="SignUp"> 
 			<div class = "modal-wrapper" style="text-align: center;">

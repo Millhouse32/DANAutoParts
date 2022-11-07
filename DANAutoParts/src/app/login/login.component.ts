@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { AppService } from '../app.service';
 import { Router } from '@angular/router';
+import { ThisReceiver } from '@angular/compiler';
 
 @Component({
   selector: 'app-login',
@@ -46,9 +47,13 @@ export class LoginComponent implements OnInit {
       if (response[0]["accessLevel"] == "1") {
         body["isAdmin"] = true;
       }
+      var tempName = body['firstname'].charAt(0).toUpperCase() + body['firstname'].slice(1);
+      localStorage.setItem("firstname", tempName);
+      localStorage.setItem("loggedIn", body["loggedIn"] + "");
+      localStorage.setItem("isAdmin", body["isAdmin"] + "");
       console.log(body);
       this.appService.passAuthenticationToNav.next(body);
-      this.appService.passFirstName.next(response[0]["firstname"]);
+      this.appService.passFirstName.next(tempName);
       this.router.navigate(['home']);
     }
     else {

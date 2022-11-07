@@ -25,7 +25,7 @@ export class NavComponent {
 
   email:string = '';
   password:string = '';
-  firstname:string = '';
+  firstname:any = '';
   lastname:string = '';
   confirmPassword:string = '';
   
@@ -55,8 +55,10 @@ export class NavComponent {
   }
 
   ngOnInit() {
-    this.isDarkTheme = localStorage.getItem('theme')=== "Dark" ? true:false;
-    this.appCom.isAuthObs.subscribe(loggedIn => this.loggedIn = loggedIn);
+    this.isDarkTheme = localStorage.getItem('theme')=== "Dark" ? true : false;
+    this.firstname = localStorage.getItem('firstname');
+    this.loggedIn = localStorage.getItem('loggedIn') == "true" ? true : false;
+    this.isAdmin = localStorage.getItem('isAdmin') == "true" ? true : false;
   }
 
   storeThemeSelection() {
@@ -142,6 +144,9 @@ logout() {
   this.loggedIn = false;
   this.isAdmin = false;
   this.appService.passFirstName.next("");
+  localStorage.setItem("firstname", "");
+  localStorage.setItem("loggedIn", "false");
+  localStorage.setItem("isAdmin", "false");
 }
 
 }
