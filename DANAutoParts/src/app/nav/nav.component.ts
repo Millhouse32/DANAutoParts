@@ -106,7 +106,6 @@ login() {
 
   this.appService.Login(body).subscribe( response => {
     console.log(response);
-    this.firstnameToHome.emit(response[0]["firstname"]);
     localStorage.setItem('firstname', response[0]["firstname"]);
   },
   error => {
