@@ -57,8 +57,6 @@ export class HomeComponent {
         this.cardsForHandset = resposne.handsetCards;
         this.cardsForWeb = resposne.webCards;
         this.loadCards();
-        this.notifierService.showNotification('Cards have been loaded successfully!', 'OK', 'success');
-
       },
       error => {
          //alert('There was an error in receiving data from server. Please try again later.');

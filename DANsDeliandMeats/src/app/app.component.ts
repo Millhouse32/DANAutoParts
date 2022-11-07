@@ -8,7 +8,7 @@ import { NavComponent } from './nav/nav.component';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'DANAutoParts';
+  title = 'DANs Deli and Meats';
 
 
   public loggedIn: boolean = localStorage.getItem("loggedIn") == "true" ? true : false;
