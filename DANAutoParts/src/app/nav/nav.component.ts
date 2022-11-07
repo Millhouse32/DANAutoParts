@@ -47,9 +47,6 @@ export class NavComponent {
   private modalService: ModalService,
   public appService:AppService,
   private notifierService:NotifierService) {
-    appService.passFirstNames$.subscribe(val=> {
-      console.log(val + "FROM NAV!");
-    })
     appService.passAuthenticationToNav$.subscribe(val => {
       this.firstname = val["firstname"];
       this.loggedIn = val["loggedIn"];
@@ -141,6 +138,10 @@ signUp() {
 
 logout() {
   console.log("Logged out");
+  this.firstname = "";
+  this.loggedIn = false;
+  this.isAdmin = false;
+  this.appService.passFirstName.next("");
 }
 
 }

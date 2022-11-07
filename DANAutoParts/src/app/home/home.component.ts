@@ -36,14 +36,19 @@ export class HomeComponent {
   constructor(private breakpointObserver: BreakpointObserver,
     public appService:AppService,
     private notifierService:NotifierService,
-    public sanitizer: DomSanitizer) {}
+    public sanitizer: DomSanitizer) {
+      appService.passFirstNames$.subscribe(val=> {
+        this.firstname = ' '+ val;
+        console.log(val);
+      })
+    }
 
   ngOnInit() {
     this.urlSafe= this.sanitizer.bypassSecurityTrustResourceUrl(this.url);
     this.isHandsetObserver.subscribe(currentObserverValue => {
       this.isHandset = currentObserverValue;
       this.loadCards();
-      this.firstname = localStorage.getItem('firstname');
+
     });
 
     this.appService.getWelcome().subscribe(

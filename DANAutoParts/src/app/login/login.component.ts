@@ -46,9 +46,10 @@ export class LoginComponent implements OnInit {
       }
       console.log(body);
       this.appService.passAuthenticationToNav.next(body);
+      this.appService.passFirstName.next(response[0]["firstname"]);
     }
     else {
-      this.appService.passAuthenticationToNav.next("error");
+
     }
     },
     error => {
