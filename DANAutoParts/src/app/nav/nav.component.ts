@@ -136,4 +136,8 @@ signUp() {
     });
 }
 
+logout() {
+  console.log("Logged out");
+}
+
 }
