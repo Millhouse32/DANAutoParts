@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { AppService } from '../app.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -14,7 +15,8 @@ export class LoginComponent implements OnInit {
 
   constructor(
     private formBuilder: FormBuilder,
-    public appService:AppService
+    public appService:AppService,
+    private router: Router
   ) { }
 
   ngOnInit() {
@@ -47,9 +49,10 @@ export class LoginComponent implements OnInit {
       console.log(body);
       this.appService.passAuthenticationToNav.next(body);
       this.appService.passFirstName.next(response[0]["firstname"]);
+      this.router.navigate(['home']);
     }
     else {
-
+      alert("Email or password incorrect!");
     }
     },
     error => {

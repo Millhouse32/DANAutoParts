@@ -38,7 +38,7 @@ export class HomeComponent {
     private notifierService:NotifierService,
     public sanitizer: DomSanitizer) {
       appService.passFirstNames$.subscribe(val=> {
-        this.firstname = ' '+ val;
+        this.firstname = val.charAt(0).toUpperCase() + val.slice(1);
         console.log(val);
       })
     }
