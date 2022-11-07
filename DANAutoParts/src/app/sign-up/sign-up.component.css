@@ -21,7 +21,9 @@
 }
 
 .form-class{
-  margin-left: 400px;
-  width: 50%;
+  width: fit-content;
   padding: 50px;
+  position: fixed;
+  left: 50%;
+  transform: translate(-50%);
 }
