@@ -22,6 +22,9 @@ export class AppService {
     return this.httpClient.post('http://localhost:3000/Login/', body);
   }
 
-  public passFirstName = new BehaviorSubject<any>("");
+  public passFirstName = new BehaviorSubject<any>(""); 
   readonly passFirstNames$ = this.passFirstName.asObservable();
+
+  public passAuthenticationToNav = new BehaviorSubject<any>("");
+  readonly passAuthenticationToNav$ = this.passAuthenticationToNav.asObservable();
 }

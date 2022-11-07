@@ -34,13 +34,26 @@ export class LoginComponent implements OnInit {
     };
     this.appService.Login(body).subscribe( response => {
       console.log(response);
+      if (response[0] != null){
       localStorage.setItem('firstname', response[0]["firstname"]);
+      var body = {
+        "firstname" : response[0]["firstname"],
+        "loggedIn" : true,
+        "isAdmin" : false
+      }
+      if (response[0]["accessLevel"] == "1") {
+        body["isAdmin"] = true;
+      }
+      console.log(body);
+      this.appService.passAuthenticationToNav.next(body);
+    }
+    else {
+      this.appService.passAuthenticationToNav.next("error");
+    }
     },
     error => {
       console.log(error);
     });
-
-    
   }
 
 }

@@ -59,7 +59,6 @@ export class HomeComponent {
          this.notifierService.showNotification('There was an error in receiving data from server! Please try again later!', 'OK', 'error');
       }
     );
-    console.log("hello" + history.state.data);
   }
 
   loadCards() {

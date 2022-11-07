@@ -50,11 +50,14 @@ export class NavComponent {
     appService.passFirstNames$.subscribe(val=> {
       console.log(val + "FROM NAV!");
     })
+    appService.passAuthenticationToNav$.subscribe(val => {
+      this.firstname = val["firstname"];
+      this.loggedIn = val["loggedIn"];
+      this.isAdmin = val["isAdmin"];
+    })
   }
 
   ngOnInit() {
-    this.isAdmin = localStorage.getItem('isAdmin') == "true" ? true : false;
-    this.loggedIn = localStorage.getItem('loggedIn') == "true" ? true : false;
     this.isDarkTheme = localStorage.getItem('theme')=== "Dark" ? true:false;
     this.appCom.isAuthObs.subscribe(loggedIn => this.loggedIn = loggedIn);
   }
