@@ -38,11 +38,11 @@ export class LoginComponent implements OnInit {
     this.appService.Login(body).subscribe( response => {
       console.log(response);
       if (response[0] != null){
-      localStorage.setItem('firstname', response[0]["firstname"]);
       var body = {
         "firstname" : response[0]["firstname"],
         "loggedIn" : true,
-        "isAdmin" : false
+        "isAdmin" : false,
+        "id" : response[0]["id"]
       }
       if (response[0]["accessLevel"] == "1") {
         body["isAdmin"] = true;
@@ -51,6 +51,7 @@ export class LoginComponent implements OnInit {
       localStorage.setItem("firstname", tempName);
       localStorage.setItem("loggedIn", body["loggedIn"] + "");
       localStorage.setItem("isAdmin", body["isAdmin"] + "");
+      localStorage.setItem('id', response[0]['id']);
       console.log(body);
       this.appService.passAuthenticationToNav.next(body);
       this.appService.passFirstName.next(tempName);
