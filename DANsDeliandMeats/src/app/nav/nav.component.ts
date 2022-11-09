@@ -146,6 +146,7 @@ logout() {
   localStorage.setItem("firstname", "");
   localStorage.setItem("loggedIn", "false");
   localStorage.setItem("isAdmin", "false");
+  localStorage.setItem('id', '');
 }
 
 }

@@ -55,6 +55,12 @@ export class LoginComponent implements OnInit {
       console.log(body);
       this.appService.passAuthenticationToNav.next(body);
       this.appService.passFirstName.next(tempName);
+      var cartBody = {
+        "id" : localStorage.getItem('id')
+      }
+      this.appService.CreateCart(cartBody).subscribe( response => {
+        console.log(response);
+      });
       this.router.navigate(['home']);
     }
     else {

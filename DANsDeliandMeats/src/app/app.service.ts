@@ -22,6 +22,14 @@ export class AppService {
     return this.httpClient.post('http://localhost:3000/Login/', body);
   }
 
+  CreateCart(body: any):Observable<any> {
+    return this.httpClient.post('http://localhost:3000/CreateCart/', body);
+  }
+
+  DropCart(body: any):Observable<any> {
+    return this.httpClient.post('http://localhost:3000/DropCart/', body);
+  }
+
   public passFirstName = new BehaviorSubject<any>(""); 
   readonly passFirstNames$ = this.passFirstName.asObservable();
 
