@@ -4,7 +4,7 @@ var router = express.Router();
 
 router.post('/', function(req, res, next) {
 
-    dbAddUserLayer.queryDropCart(req["body"]["id"]).then(response=>{
+    DbDropCart.queryDropCart(req["body"]["id"]).then(response=>{
         res.json(response);
     }).catch(error=>{
         res.status(500).json({});

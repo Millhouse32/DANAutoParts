@@ -3,6 +3,7 @@ import { webSocket } from 'rxjs/webSocket';
 import { AppService } from '../app.service';
 import { ModalService } from '../_modal';
 import { FormBuilder, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-admin',
@@ -18,7 +19,8 @@ export class AdminComponent implements OnInit {
 
   constructor(public appService:AppService,
   private modalService:ModalService,
-  private formBuilder: FormBuilder) { 
+  private formBuilder: FormBuilder,
+  private router: Router) { 
 
   }
 
@@ -54,16 +56,27 @@ export class AdminComponent implements OnInit {
     this.modalService.open('GrantAccess')
   }
 
-  submitAdmin() {
-        if (!this.grantAccessForm.valid) {
-      return;
+  submit() {
+        if (this.grantAccessForm.valid) {
+          var body = {
+            "email" : this.grantAccessForm.value["email"]
+          }
+          this.appService.GrantAccess(body).subscribe(resposne => {
+            console.log(resposne);
+            if (resposne["success"] == true) {
+              console.log('user granted admin access');
+              window.location.reload();
+              this.modalService.close('GrantAccess');
+            }
+            else {
+              alert('User not found!');
+              this.grantAccessForm.reset();
+            }
+
+          },
+          error => {
+            console.log(error);
+          });
+        }
     }
-    var body = {
-      "email" : this.grantAccessForm.value["email"],
-    };
-    console.log(body);
-  }
-
-
-
 }

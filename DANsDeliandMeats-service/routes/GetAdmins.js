@@ -9,6 +9,7 @@ router.get ('/', function(req, res, next){
         console.log(response);
         res.json(response);
       }).catch(error=>{
+        console.log(error);
         res.status(500).json({});
       });
 });

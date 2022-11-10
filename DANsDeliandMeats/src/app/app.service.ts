@@ -34,6 +34,10 @@ export class AppService {
     return this.httpClient.get('http://localhost:3000/GetAdmins');
   }
 
+  GrantAccess(body: any):Observable<any> {
+    return this.httpClient.post('http://localhost:3000/GrantAccess', body);
+  }
+
   public passFirstName = new BehaviorSubject<any>(""); 
   readonly passFirstNames$ = this.passFirstName.asObservable();
 
