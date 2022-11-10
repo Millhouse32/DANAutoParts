@@ -9,11 +9,22 @@ import { AppService } from '../app.service';
 })
 export class AdminComponent implements OnInit {
 
+  adminUsers = [];
+
   constructor(public appService:AppService) { 
 
   }
 
   ngOnInit(): void {
+        this.appService.GetAdmins().subscribe(
+      resposne => {
+        this.adminUsers = resposne;
+        console.log(this.adminUsers);
+      },
+      error => {
+         console.log(error);
+      }
+    );
   }
 
   onSend(){
@@ -27,5 +38,7 @@ export class AdminComponent implements OnInit {
 
 
   }
+
+
 
 }

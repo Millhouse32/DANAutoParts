@@ -30,6 +30,10 @@ export class AppService {
     return this.httpClient.post('http://localhost:3000/DropCart/', body);
   }
 
+  GetAdmins():Observable<any> {
+    return this.httpClient.get('http://localhost:3000/GetAdmins');
+  }
+
   public passFirstName = new BehaviorSubject<any>(""); 
   readonly passFirstNames$ = this.passFirstName.asObservable();
 
