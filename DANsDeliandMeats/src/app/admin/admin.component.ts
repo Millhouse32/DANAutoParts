@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { webSocket } from 'rxjs/webSocket';
 import { AppService } from '../app.service';
+import { ModalService } from '../_modal';
+import { FormBuilder, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-admin',
@@ -9,10 +11,14 @@ import { AppService } from '../app.service';
 })
 export class AdminComponent implements OnInit {
 
+  grantAccessForm: any;
+  emailRegx = /^(([^<>+()\[\]\\.,;:\s@"-#$%&=]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,3}))$/;
   adminUsers = [];
   displayedColumns: string[] = ['Name', 'Email'];
 
-  constructor(public appService:AppService) { 
+  constructor(public appService:AppService,
+  private modalService:ModalService,
+  private formBuilder: FormBuilder) { 
 
   }
 
@@ -26,6 +32,9 @@ export class AdminComponent implements OnInit {
          console.log(error);
       }
     );
+        this.grantAccessForm = this.formBuilder.group({
+      email: [null, [Validators.required, Validators.pattern(this.emailRegx)]],
+    });
   }
 
   onSend(){
@@ -38,6 +47,21 @@ export class AdminComponent implements OnInit {
     connection.next({tablename: 'hello world'});
 
 
+  }
+
+  onGrantAccess() {
+    this.grantAccessForm.reset();
+    this.modalService.open('GrantAccess')
+  }
+
+  submitAdmin() {
+        if (!this.grantAccessForm.valid) {
+      return;
+    }
+    var body = {
+      "email" : this.grantAccessForm.value["email"],
+    };
+    console.log(body);
   }
 
 

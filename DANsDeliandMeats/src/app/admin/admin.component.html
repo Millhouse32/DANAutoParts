@@ -37,7 +37,7 @@
         </mat-card-content>
         <mat-card-footer style="margin-top: auto">
         <div style="text-align: right; margin-right: 5%;">
-          <button mat-fab color="primary">
+          <button mat-fab color="primary" (click)="onGrantAccess()">
           <mat-icon>add_circle</mat-icon>
            </button>
            </div>
@@ -56,3 +56,21 @@
     </mat-grid-tile>
   </mat-grid-list>
 </div>
+
+<jw-modal id="GrantAccess">
+     <div class="container">
+    <form class="form-class" [formGroup]="grantAccessForm" (submit)="submitAdmin()">
+      <h1>Add Admin User</h1>
+      <mat-form-field class="form-field" appearance="outline">
+        <mat-label> E-mail
+        </mat-label>
+        <input matInput formControlName="email" required>
+        <mat-error *ngIf="grantAccessForm.controls.email.touched && grantAccessForm.controls.email.invalid">
+          <span *ngIf="grantAccessForm.controls.email.errors.required">This field is mandatory.</span>
+          <span *ngIf="grantAccessForm.controls.email.errors.pattern">This field is invalid.</span>
+        </mat-error>
+      </mat-form-field>
+      <button class="test" mat-raised-button color="primary" type="submit">Submit</button>
+    </form>
+    </div>
+</jw-modal>

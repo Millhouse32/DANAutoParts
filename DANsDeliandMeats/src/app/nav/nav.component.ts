@@ -147,6 +147,7 @@ logout() {
   localStorage.setItem("loggedIn", "false");
   localStorage.setItem("isAdmin", "false");
   localStorage.setItem('id', '');
+  this.router.navigate(['/home']);
 }
 
 }
