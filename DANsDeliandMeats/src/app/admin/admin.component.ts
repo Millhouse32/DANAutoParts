@@ -10,6 +10,7 @@ import { AppService } from '../app.service';
 export class AdminComponent implements OnInit {
 
   adminUsers = [];
+  displayedColumns: string[] = ['Name', 'Email'];
 
   constructor(public appService:AppService) { 
 
