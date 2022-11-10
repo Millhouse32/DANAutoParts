@@ -34,6 +34,21 @@ table {
   gap: 1rem;
 }
 
+td, th {
+    text-align: center !important;
+    vertical-align: middle !important;
+}
+
+.mat-sort-header-container {
+    justify-content: center !important;
+}
+
+.mat-table {
+    overflow-y: scroll;
+    overflow-x: scroll;
+    max-height: 20px;
+}
+
 
 
 .card-title {
@@ -101,4 +116,15 @@ table tr:nth-child(even) {
   position: absolute;
   width: 50%;
   bottom: 10px;
+}
+
+.table-container {
+  margin-top: 10px;
+  max-height: 150px;
+  overflow: auto;
+  border:1px solid black;
+}
+
+.mat-header-row, .mat-row {
+  height: 30px;
 }
