@@ -91,7 +91,7 @@ export class AdminComponent implements OnInit {
       email: [null, [Validators.required, Validators.pattern(this.emailRegx)]],
     });
 
-    this.TopSellersSubmit();
+    this.topSellersChange('general');
   }
 
   onSend(){
@@ -134,9 +134,8 @@ export class AdminComponent implements OnInit {
       return this.form.controls;
     }
 
-    TopSellersSubmit(){
-      console.log(this.form.value);
-      if (this.form.value['product'] == 'general') {
+    topSellersChange(event: any) {
+      if (event == 'general') {
         this.appService.TopSellersGeneral().subscribe(
           response => {
             this.topSellers = response;
@@ -147,7 +146,7 @@ export class AdminComponent implements OnInit {
           }
         );
       }
-      else if (this.form.value['product'] == 'chicken') {
+      else if (event == 'chicken') {
         this.appService.TopSellersChicken().subscribe(
           response => {
             this.topSellers = response;
@@ -158,7 +157,7 @@ export class AdminComponent implements OnInit {
           }
         );
       }
-      else if (this.form.value['product'] == 'pork') {
+      else if (event == 'pork') {
         this.appService.TopSellersPork().subscribe(
           response => {
             this.topSellers = response;

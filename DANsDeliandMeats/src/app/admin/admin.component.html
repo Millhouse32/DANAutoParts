@@ -54,6 +54,7 @@
         </mat-card-header>
         <mat-card-content>
           <form [formGroup]="changePriceForm" (ngSubmit)="changePriceSubmit()">
+            <div style="text-align: center; margin-right: 40px">
             <mat-form-field appearance="fill">
               <mat-label>Product Type</mat-label>
               <mat-select formControlName="productType" (valueChange)="selectPriceTypeChange($event)">
@@ -76,13 +77,15 @@
                 Please select a product
               </mat-error>
             </mat-form-field>
-            <div  *ngIf="currentPrice != -999">
+            </div>
+            <div style="text-align: center;" *ngIf="currentPrice != -999">
               <mat-label>Current Price: {{currentPrice}}</mat-label>
               <mat-form-field>
                 <mat-label>New Price</mat-label>
                 <input type="number" matInput formControlName="price">
               </mat-form-field>
-              <button style="margin-left: auto;" mat-raised-button color="primary">Submit</button>
+              <br>
+              <button style="margin-right: 50px;" mat-raised-button color="primary">Submit</button>
             </div>
             <br>
             </form>
@@ -127,11 +130,11 @@
               <tr mat-row *matRowDef="let row; columns: displayedColumnsTopSellers;"></tr>
             </table>
           </div>
-          <div class="grid-dropdown">
-            <form [formGroup]="form" (ngSubmit)="TopSellersSubmit()">
+          <div class="grid-dropdown" style="margin-top: 20px;">
+            <form [formGroup]="form">
             <mat-form-field appearance="fill">
               <mat-label>Product Type</mat-label>
-              <mat-select formControlName="product">
+              <mat-select formControlName="product" (valueChange)="topSellersChange($event)">
                 <mat-option *ngFor="let meat of meatType" [value]="meat.value">
                   {{meat.viewValue}}
                 </mat-option>
@@ -141,7 +144,6 @@
               </mat-error>
             </mat-form-field>
             <br>
-            <button style="margin-left: 20%;" mat-raised-button color="primary">Submit</button>
             </form>
           </div>
           </div>
