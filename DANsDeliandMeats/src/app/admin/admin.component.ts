@@ -134,10 +134,26 @@ export class AdminComponent implements OnInit {
         );
       }
       else if (this.form.value['product'] == 'pork') {
-
+        this.appService.TopSellersPork().subscribe(
+          response => {
+            this.topSellers = response;
+            console.log(response);
+          },
+          error => {
+             console.log(error);
+          }
+        );
       }
       else {
-
+        this.appService.TopSellersBeef().subscribe(
+          response => {
+            this.topSellers = response;
+            console.log(response);
+          },
+          error => {
+             console.log(error);
+          }
+        );
       }
     }
 }

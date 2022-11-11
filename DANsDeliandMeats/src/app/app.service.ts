@@ -46,6 +46,14 @@ export class AppService {
     return this.httpClient.get('http://localhost:3000/TopSellersChicken');
   }
 
+  TopSellersPork():Observable<any> {
+    return this.httpClient.get('http://localhost:3000/TopSellersPork');
+  }
+
+  TopSellersBeef():Observable<any> {
+    return this.httpClient.get('http://localhost:3000/TopSellersBeef');
+  }
+
   public passFirstName = new BehaviorSubject<any>(""); 
   readonly passFirstNames$ = this.passFirstName.asObservable();
 

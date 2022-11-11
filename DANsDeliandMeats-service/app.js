@@ -14,6 +14,8 @@ var getAdminsRouter = require('./routes/GetAdmins');
 var grantAccessRouter = require('./routes/GrantAccess');
 var topSellersGeneralRouter = require('./routes/TopSellersGeneral');
 var topSellersChickenRouter = require('./routes/TopSellersChicken');
+var topSellersBeefRouter = require('./routes/TopSellersBeef');
+var topSellersPorkRouter = require('./routes/TopSellersPork');
 var cors = require('cors');
 
 var app = express();
@@ -39,6 +41,8 @@ app.use('/GetAdmins', getAdminsRouter);
 app.use('/GrantAccess', grantAccessRouter);
 app.use('/TopSellersGeneral', topSellersGeneralRouter);
 app.use('/TopSellersChicken', topSellersChickenRouter);
+app.use('/TopSellersBeef', topSellersBeefRouter);
+app.use('/TopSellersPork', topSellersPorkRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
