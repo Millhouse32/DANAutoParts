@@ -23,7 +23,7 @@ export class AdminComponent implements OnInit {
   adminUsers = [];
   displayedColumns: string[] = ['Name', 'Email'];
   topSellers = [];
-  displayedColumnsTopSellers: string[] = ['Product', 'Pounds Sold'];
+  displayedColumnsTopSellers: string[] = ['PLU', 'Product', 'Pounds Sold'];
 
   selectedOption = 'general';
 

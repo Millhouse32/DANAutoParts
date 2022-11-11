@@ -175,3 +175,13 @@ table tr:nth-child(even) {
 .test {
   margin-left: 10px;
 }
+
+.grid-container2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 20px;
+}
+
+.grid-dropdown {
+  margin-left: 30%;
+}
