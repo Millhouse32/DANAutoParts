@@ -2,32 +2,55 @@ import { Component, OnInit } from '@angular/core';
 import { webSocket } from 'rxjs/webSocket';
 import { AppService } from '../app.service';
 import { ModalService } from '../_modal';
-import { FormBuilder, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+
+interface MeatType {
+  value: string;
+  viewValue:string;
+}
 
 @Component({
   selector: 'app-admin',
   templateUrl: './admin.component.html',
   styleUrls: ['./admin.component.css']
 })
+
 export class AdminComponent implements OnInit {
 
   grantAccessForm: any;
   emailRegx = /^(([^<>+()\[\]\\.,;:\s@"-#$%&=]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,3}))$/;
   adminUsers = [];
   displayedColumns: string[] = ['Name', 'Email'];
+  topSellers = [];
+  displayedColumnsTopSellers: string[] = ['Product', 'Pounds Sold'];
+
+  selectedOption = 'general';
+
+  meatType:MeatType[] = [
+    {value: 'general', viewValue: 'General'},
+    {value: 'chicken', viewValue: 'Chicken'},
+    {value: 'pork', viewValue: 'Pork'},
+    {value: 'beef', viewValue: 'Beef'}
+  ]
+
+  form: FormGroup = new FormGroup({});
 
   constructor(public appService:AppService,
   private modalService:ModalService,
   private formBuilder: FormBuilder,
   private router: Router) { 
 
+    this.form = formBuilder.group({
+      product: [this.selectedOption, [Validators.required]],
+    })
+
   }
 
   ngOnInit(): void {
         this.appService.GetAdmins().subscribe(
-      resposne => {
-        this.adminUsers = resposne;
+      response => {
+        this.adminUsers = response;
         console.log(this.adminUsers);
       },
       error => {
@@ -37,6 +60,8 @@ export class AdminComponent implements OnInit {
         this.grantAccessForm = this.formBuilder.group({
       email: [null, [Validators.required, Validators.pattern(this.emailRegx)]],
     });
+
+    this.TopSellersSubmit();
   }
 
   onSend(){
@@ -78,5 +103,41 @@ export class AdminComponent implements OnInit {
             console.log(error);
           });
         }
+    }
+
+    get f(){
+      return this.form.controls;
+    }
+
+    TopSellersSubmit(){
+      console.log(this.form.value);
+      if (this.form.value['product'] == 'general') {
+        this.appService.TopSellersGeneral().subscribe(
+          response => {
+            this.topSellers = response;
+            console.log(response);
+          },
+          error => {
+             console.log(error);
+          }
+        );
+      }
+      else if (this.form.value['product'] == 'chicken') {
+        this.appService.TopSellersChicken().subscribe(
+          response => {
+            this.topSellers = response;
+            console.log(response);
+          },
+          error => {
+             console.log(error);
+          }
+        );
+      }
+      else if (this.form.value['product'] == 'pork') {
+
+      }
+      else {
+
+      }
     }
 }

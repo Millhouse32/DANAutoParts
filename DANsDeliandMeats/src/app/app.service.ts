@@ -38,6 +38,14 @@ export class AppService {
     return this.httpClient.post('http://localhost:3000/GrantAccess', body);
   }
 
+  TopSellersGeneral():Observable<any> {
+    return this.httpClient.get('http://localhost:3000/TopSellersGeneral');
+  }
+
+  TopSellersChicken():Observable<any> {
+    return this.httpClient.get('http://localhost:3000/TopSellersChicken');
+  }
+
   public passFirstName = new BehaviorSubject<any>(""); 
   readonly passFirstNames$ = this.passFirstName.asObservable();
 
