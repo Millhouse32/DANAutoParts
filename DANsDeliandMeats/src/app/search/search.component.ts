@@ -104,16 +104,21 @@ export class SearchComponent implements OnInit {
     this.selectedOption = event;
   }
 
-  test(val: any) {
-    const Price = val['Price'];
-    const Product = val['Item'];
-    var body = {
-      'Price' : val['Price'],
-      'Product' : val['Item'],
-      'PLU' : val['PLU']
-    };
-    this.tempCart.push(body); 
-    console.log(this.tempCart);
-  }
+  AddToTempCart(val: any) {
 
-}
+    var input = document.getElementById(val['PLU']) as HTMLInputElement | null;
+    if (input != null) {
+      var quantity = input.value;
+      if (quantity != "") {
+      var body = {
+        'Price' : val['Price'],
+        'Product' : val['Item'],
+        'PLU' : val['PLU'],
+        'Quantity' : quantity
+      };
+      this.tempCart.push(body); 
+    }
+    }
+    console.log(this.tempCart);
+    }
+  }

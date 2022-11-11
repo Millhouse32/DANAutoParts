@@ -39,12 +39,12 @@
 
       <ng-container matColumnDef="Quantity">
         <th mat-header-cell *matHeaderCellDef> Quantity (lbs.) </th>
-        <td mat-cell *matCellDef="let element"> <input mat-input type="number"> </td>
+        <td mat-cell *matCellDef="let element"> <input id="{{element.PLU}}" mat-input type="number"> </td>
       </ng-container>
 
       <ng-container matColumnDef="AddToCart">
         <th mat-header-cell *matHeaderCellDef> Add to Cart </th>
-        <td mat-cell *matCellDef="let element"> <button mat-button color="primary" (click)="test(element)"><mat-icon>add_shopping_cart</mat-icon></button> </td>
+        <td mat-cell *matCellDef="let element"> <button mat-button color="primary" (click)="AddToTempCart(element)"><mat-icon>add_shopping_cart</mat-icon></button> </td>
       </ng-container>
 
       
