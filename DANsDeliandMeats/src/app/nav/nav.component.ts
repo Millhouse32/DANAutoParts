@@ -143,11 +143,13 @@ logout() {
   this.loggedIn = false;
   this.isAdmin = false;
   this.appService.passFirstName.next("");
+  this.notifierService.showNotification(localStorage.getItem('firstname') + ' has been logged out.', 'OK', 'success');
   localStorage.setItem("firstname", "");
   localStorage.setItem("loggedIn", "false");
   localStorage.setItem("isAdmin", "false");
   localStorage.setItem('id', '');
   this.router.navigate(['/home']);
+
 }
 
 }
