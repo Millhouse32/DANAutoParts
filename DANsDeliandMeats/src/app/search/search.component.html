@@ -5,5 +5,16 @@
     <input formControlName="search" matInput [(ngModel)]="searchTerm" />
     <mat-icon matPrefix>search</mat-icon>
   </mat-form-field>
+  <mat-form-field appearance="fill">
+    <mat-label>Filter</mat-label>
+    <mat-select formControlName="product" (valueChange)="filterChange($event)">
+      <mat-option *ngFor="let product of filterProduct" [value]="product.value">
+        {{product.viewValue}}
+      </mat-option>
+    </mat-select>
+    <mat-error *ngIf="form.get('meatType')?.hasError('required')">
+      Please select a product type
+    </mat-error>
+  </mat-form-field>
   </form>
   </div>
