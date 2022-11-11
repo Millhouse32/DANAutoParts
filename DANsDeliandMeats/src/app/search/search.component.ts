@@ -21,6 +21,8 @@ export class SearchComponent implements OnInit {
     { value: 'chicken', viewValue: 'Chicken Products' }
   ]
 
+  tempCart:any = [];
+
    searchTerm = '';
    hasSearched = false;
    form: FormGroup = new FormGroup({});
@@ -100,6 +102,18 @@ export class SearchComponent implements OnInit {
 
   filterChange(event: any) {
     this.selectedOption = event;
+  }
+
+  test(val: any) {
+    const Price = val['Price'];
+    const Product = val['Item'];
+    var body = {
+      'Price' : val['Price'],
+      'Product' : val['Item'],
+      'PLU' : val['PLU']
+    };
+    this.tempCart.push(body); 
+    console.log(this.tempCart);
   }
 
 }
