@@ -22,8 +22,11 @@ export class SearchComponent implements OnInit {
   ]
 
    searchTerm = '';
+   hasSearched = false;
    form: FormGroup = new FormGroup({});
    selectedOption = 'all';
+   searchResults = ['false'];
+   displayedColumns: string[] = ['Product', 'Price'];
 
   constructor(
     private formBuilder: FormBuilder,
@@ -48,7 +51,9 @@ export class SearchComponent implements OnInit {
     if (this.selectedOption == 'all') {
       this.appService.SearchAll(body).subscribe(
         response => {
-          console.log(response);
+          this.searchResults = response[0];
+          console.log(this.searchResults);
+          this.hasSearched = true;
         },
         error => {
           console.log(error);
@@ -59,6 +64,8 @@ export class SearchComponent implements OnInit {
       this.appService.SearchBeef(body).subscribe(
         response => {
           console.log(response);
+          this.searchResults = response[0];
+          this.hasSearched = true;
         },
         error => {
           console.log(error);
@@ -69,6 +76,8 @@ export class SearchComponent implements OnInit {
       this.appService.SearchPork(body).subscribe(
         response => {
           console.log(response);
+          this.searchResults = response[0];
+          this.hasSearched = true;
         },
         error => {
           console.log(error);
@@ -78,7 +87,9 @@ export class SearchComponent implements OnInit {
     else if (this.selectedOption == 'chicken') {
       this.appService.SearchChicken(body).subscribe(
         response => {
-          console.log(response);
+          this.searchResults = response[0];
+          console.log(this.searchResults);
+          this.hasSearched = true;
         },
         error => {
           console.log(error);
