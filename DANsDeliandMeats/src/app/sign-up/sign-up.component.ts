@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AppService } from '../app.service';
+import { NotifierService } from '../notifier.service';
 
 @Component({
   selector: 'app-sign-up',
@@ -15,7 +16,8 @@ export class SignUpComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     public appService: AppService,
-    private router: Router
+    private router: Router,
+    private notifierService:NotifierService
   ) { }
 
   ngOnInit() {

@@ -4,6 +4,8 @@ import { AppService } from '../app.service';
 import { ModalService } from '../_modal';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { NotifierService } from '../notifier.service';
+
 
 interface MeatType {
   value: string;
@@ -37,6 +39,7 @@ export class AdminComponent implements OnInit {
 
   selectedOption = 'general';
   selectedPriceChangeType = '';
+  currentPrice = -999;
 
   meatType:MeatType[] = [
     {value: 'general', viewValue: 'General'},
@@ -54,14 +57,22 @@ export class AdminComponent implements OnInit {
   changePrice:ChangePrice[] = [];
 
   form: FormGroup = new FormGroup({});
+  changePriceForm: FormGroup = new FormGroup({});
 
   constructor(public appService:AppService,
   private modalService:ModalService,
   private formBuilder: FormBuilder,
-  private router: Router) { 
+  private router: Router,
+  private notifierService:NotifierService) { 
 
     this.form = formBuilder.group({
       product: [this.selectedOption, [Validators.required]],
+    })
+
+    this.changePriceForm = formBuilder.group({
+        productType: [null, Validators.required],
+        product: [null, Validators.required],
+        price: [null, Validators.required]
     })
 
   }
@@ -107,19 +118,14 @@ export class AdminComponent implements OnInit {
           }
           this.appService.GrantAccess(body).subscribe(resposne => {
             console.log(resposne);
-            if (resposne["success"] == true) {
-              console.log('user granted admin access');
-              window.location.reload();
-              this.modalService.close('GrantAccess');
-            }
-            else {
-              alert('User not found!');
-              this.grantAccessForm.reset();
-            }
+            console.log('user granted admin access');
+            window.location.reload();
+            this.modalService.close('GrantAccess');
 
           },
           error => {
-            console.log(error);
+            this.notifierService.showNotification('User not found!', 'OK', 'error')
+            this.grantAccessForm.reset();
           });
         }
     }
@@ -185,7 +191,6 @@ export class AdminComponent implements OnInit {
             for (let result of response) {
               this.changePrice.push({value : { PLU : result.PLU, name : result.Item, price : result.Price }, viewValue : result.Item});
             }
-            console.log(this.changePrice);
           },
           error => {
             console.log(error);
@@ -200,7 +205,6 @@ export class AdminComponent implements OnInit {
             for (let result of response) {
               this.changePrice.push({value : { PLU : result.PLU, name : result.Item, price : result.Price }, viewValue : result.Item});
             }
-            console.log(this.changePrice);
           },
           error => {
             console.log(error);
@@ -215,12 +219,36 @@ export class AdminComponent implements OnInit {
             for (let result of response) {
               this.changePrice.push({value : { PLU : result.PLU, name : result.Item, price : result.Price }, viewValue : result.Item});
             }
-            console.log(this.changePrice);
           },
           error => {
             console.log(error);
           }
         );
       }
+    }
+
+    selectProductChange(event:any) {
+      console.log(event);
+      this.currentPrice = event['price'];
+    }
+
+    changePriceSubmit(){
+      console.log(this.changePriceForm.value);
+      var body = {
+        table : this.changePriceForm.value['productType'],
+        PLU : this.changePriceForm.value['product']['PLU'],
+        price : this.changePriceForm.value['price']
+      };
+      this.appService.PriceChange(body).subscribe(
+        response => {
+          console.log(response);
+          if (response['success'] == true) {
+            this.notifierService.showNotification('Price Updated!', 'OK', 'success');
+          }
+        },
+        error => {
+          console.log(error);
+        }
+      )
     }
 }

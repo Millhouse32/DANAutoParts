@@ -23,28 +23,27 @@ connection.connect(function(err) {
     connected = true;
 });
 
-async function queryGrantAccess(email) {
+async function queryPriceChange(table, PLU, price) {
     if (connected) {
-
         let jsonResponse = { };
-        jsonResponse = await new Promise (function(resolve, reject) {
-            let sql = 'CALL GrantAdmin(?)';
-            connection.query(sql, [email],function(err, rows){
-                if (err){
-                    console.log(err);
+        jsonReponse = await new Promise (function(resolve, reject) {
+            let sql = 'CALL PriceChange(?,?,?)';
+            connection.query(sql, [table, PLU, price], function(err, rows) {
+                if (err) {
+                    jsonResponse = {"success" : false};
+                    resolve(jsonResponse);
                 }
                 else {
-                    jsonResponse = rows[0];
-                    console.log(jsonResponse);
+                    jsonResponse = {"success": true};
                     resolve(jsonResponse);
                 }
             });
         });
-        return jsonResponse;    
+        return jsonResponse;
     }
     else {
         return null;
     }
 }
 
-module.exports = { queryGrantAccess };
+module.exports = { queryPriceChange };

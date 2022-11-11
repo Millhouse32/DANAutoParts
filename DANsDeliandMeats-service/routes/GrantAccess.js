@@ -6,15 +6,16 @@ var router = express.Router();
 router.post ('/', function(req, res, next){
 
     dbLogin.queryGrantAccess(req["body"]["email"]).then(response=>{
-        var body = {
-            "success" : true
-        };
-        res.json(body);
+        console.log(response);
+        if (response[0]['email'] == null) {
+          console.log('error');
+        }
+        else {
+          console.log('pass');
+          res.json({success : true });
+        }
       }).catch(error=>{
-        var body = {
-            "success" : false
-        };
-        res.status(500).json({});
+        res.status(500).json({error});
       });
 });
 
