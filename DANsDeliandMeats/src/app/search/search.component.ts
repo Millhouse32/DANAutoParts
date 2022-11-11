@@ -31,6 +31,7 @@ export class SearchComponent implements OnInit {
   ) { 
     this.form = formBuilder.group({
       search: [null, [Validators.required]],
+      product: []
     });
 
 
@@ -46,6 +47,36 @@ export class SearchComponent implements OnInit {
     };
     if (this.selectedOption == 'all') {
       this.appService.SearchAll(body).subscribe(
+        response => {
+          console.log(response);
+        },
+        error => {
+          console.log(error);
+        }
+    );
+    }
+    else if (this.selectedOption == 'beef') {
+      this.appService.SearchBeef(body).subscribe(
+        response => {
+          console.log(response);
+        },
+        error => {
+          console.log(error);
+        }
+    );
+    }
+    else if (this.selectedOption == 'pork') {
+      this.appService.SearchPork(body).subscribe(
+        response => {
+          console.log(response);
+        },
+        error => {
+          console.log(error);
+        }
+    );
+    }
+    else if (this.selectedOption == 'chicken') {
+      this.appService.SearchChicken(body).subscribe(
         response => {
           console.log(response);
         },

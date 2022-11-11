@@ -21,6 +21,9 @@ var getAllPorkRouter = require('./routes/GetAllPork');
 var getAllChickenRouter = require('./routes/GetAllChicken');
 var priceChangeRouter = require('./routes/PriceChange');
 var searchAllRouter = require('./routes/SearchAll');
+var searchBeefRouter = require('./routes/SearchBeef');
+var searchChickenRouter = require('./routes/SearchChicken');
+var searchPorkRouter = require('./routes/SearchPork');
 var cors = require('cors');
 
 var app = express();
@@ -53,6 +56,10 @@ app.use('/GetAllPork', getAllPorkRouter);
 app.use('/GetAllChicken', getAllChickenRouter);
 app.use('/PriceChange', priceChangeRouter);
 app.use('/SearchAll', searchAllRouter);
+app.use('/SearchBeef', searchBeefRouter);
+app.use('/SearchPork', searchPorkRouter);
+app.use('/SearchChicken', searchChickenRouter);
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

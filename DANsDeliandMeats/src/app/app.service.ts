@@ -74,6 +74,19 @@ export class AppService {
     return this.httpClient.post('http://localhost:3000/SearchAll', body);
   }
 
+  SearchBeef(body: any):Observable<any> {
+    return this.httpClient.post('http://localhost:3000/SearchBeef', body);
+  }
+
+  SearchChicken(body: any):Observable<any> {
+    return this.httpClient.post('http://localhost:3000/SearchChicken', body);
+  }
+
+  SearchPork(body: any):Observable<any> {
+    return this.httpClient.post('http://localhost:3000/SearchPork', body);
+  }
+
+
   public passFirstName = new BehaviorSubject<any>(""); 
   readonly passFirstNames$ = this.passFirstName.asObservable();
 
