@@ -26,7 +26,7 @@ export class SearchComponent implements OnInit {
    form: FormGroup = new FormGroup({});
    selectedOption = 'all';
    searchResults = ['false'];
-   displayedColumns: string[] = ['Product', 'Price'];
+   displayedColumns: string[] = ['Product', 'Price', 'Quantity', 'AddToCart'];
 
   constructor(
     private formBuilder: FormBuilder,
