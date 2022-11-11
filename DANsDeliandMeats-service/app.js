@@ -16,6 +16,9 @@ var topSellersGeneralRouter = require('./routes/TopSellersGeneral');
 var topSellersChickenRouter = require('./routes/TopSellersChicken');
 var topSellersBeefRouter = require('./routes/TopSellersBeef');
 var topSellersPorkRouter = require('./routes/TopSellersPork');
+var getAllBeefRouter = require('./routes/GetAllBeef');
+var getAllPorkRouter = require('./routes/GetAllPork');
+var getAllChickenRouter = require('./routes/GetAllChicken');
 var cors = require('cors');
 
 var app = express();
@@ -43,6 +46,9 @@ app.use('/TopSellersGeneral', topSellersGeneralRouter);
 app.use('/TopSellersChicken', topSellersChickenRouter);
 app.use('/TopSellersBeef', topSellersBeefRouter);
 app.use('/TopSellersPork', topSellersPorkRouter);
+app.use('/GetAllBeef', getAllBeefRouter);
+app.use('/GetAllPork', getAllPorkRouter);
+app.use('/GetAllChicken', getAllChickenRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

@@ -10,6 +10,16 @@ interface MeatType {
   viewValue:string;
 }
 
+interface ChangePrice {
+  value: {},
+  viewValue:string;
+}
+
+interface ChangePriceType {
+  value: string;
+  viewValue:string;
+}
+
 @Component({
   selector: 'app-admin',
   templateUrl: './admin.component.html',
@@ -26,6 +36,7 @@ export class AdminComponent implements OnInit {
   displayedColumnsTopSellers: string[] = ['PLU', 'Product', 'Pounds Sold'];
 
   selectedOption = 'general';
+  selectedPriceChangeType = '';
 
   meatType:MeatType[] = [
     {value: 'general', viewValue: 'General'},
@@ -33,6 +44,14 @@ export class AdminComponent implements OnInit {
     {value: 'pork', viewValue: 'Pork'},
     {value: 'beef', viewValue: 'Beef'}
   ]
+
+  changePriceType:ChangePriceType[] = [
+    { value: 'chicken', viewValue: 'Chicken'},
+    { value: 'pork', viewValue: 'Pork'},
+    { value: 'beef', viewValue: 'Beef'}
+  ]
+
+  changePrice:ChangePrice[] = [];
 
   form: FormGroup = new FormGroup({});
 
@@ -152,6 +171,54 @@ export class AdminComponent implements OnInit {
           },
           error => {
              console.log(error);
+          }
+        );
+      }
+    }
+
+    selectPriceTypeChange(event:any) {
+      if (event == 'beef') {
+        this.appService.GetAllBeef().subscribe(
+          response => {
+            this.changePrice = [];
+            //console.log(response);
+            for (let result of response) {
+              this.changePrice.push({value : { PLU : result.PLU, name : result.Item, price : result.Price }, viewValue : result.Item});
+            }
+            console.log(this.changePrice);
+          },
+          error => {
+            console.log(error);
+          }
+        );
+      }
+      else if (event == 'pork') {
+        this.appService.GetAllPork().subscribe(
+          response => {
+            //console.log(response);
+            this.changePrice = [];
+            for (let result of response) {
+              this.changePrice.push({value : { PLU : result.PLU, name : result.Item, price : result.Price }, viewValue : result.Item});
+            }
+            console.log(this.changePrice);
+          },
+          error => {
+            console.log(error);
+          }
+        );
+      }
+      else if (event == 'chicken') {
+        this.appService.GetAllChicken().subscribe(
+          response => {
+            //console.log(response);
+            this.changePrice = [];
+            for (let result of response) {
+              this.changePrice.push({value : { PLU : result.PLU, name : result.Item, price : result.Price }, viewValue : result.Item});
+            }
+            console.log(this.changePrice);
+          },
+          error => {
+            console.log(error);
           }
         );
       }
