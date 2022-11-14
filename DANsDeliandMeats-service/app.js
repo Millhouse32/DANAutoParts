@@ -25,6 +25,8 @@ var searchBeefRouter = require('./routes/SearchBeef');
 var searchChickenRouter = require('./routes/SearchChicken');
 var searchPorkRouter = require('./routes/SearchPork');
 var addToCartRouter = require('./routes/AddToCart');
+var updateCartRouter = require('./routes/UpdateCart');
+var removeFromCartRouter = require('./routes/RemoveFromCart');
 var cors = require('cors');
 
 var app = express();
@@ -61,6 +63,8 @@ app.use('/SearchBeef', searchBeefRouter);
 app.use('/SearchPork', searchPorkRouter);
 app.use('/SearchChicken', searchChickenRouter);
 app.use('/AddToCart', addToCartRouter);
+app.use('/UpdateCart', updateCartRouter);
+app.use('/RemoveFromCart', removeFromCartRouter);
 
 
 // catch 404 and forward to error handler

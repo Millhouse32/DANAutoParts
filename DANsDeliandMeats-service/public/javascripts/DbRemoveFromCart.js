@@ -23,12 +23,12 @@ connection.connect(function(err) {
     connected = true;
 });
 
-async function queryUpdateCart(id, PLU, quantity) {
+async function queryRemoveFromCart(id, PLU) {
     if (connection) {
         let jsonResponse = { };
         jsonResponse = await new Promise (function(resolve, reject) {
-            let sql = 'CALL UpdateCart(?,?,?)';
-            connection.query(sql, [id, PLU, quantity], function(err, rows) {
+            let sql = 'CALL RemoveFromCart(?,?)';
+            connection.query(sql, [id, PLU], function(err, rows) {
                 if (err) {
                     console.log(err);
                     jsonResponse = err;
@@ -47,4 +47,4 @@ async function queryUpdateCart(id, PLU, quantity) {
     }
 }
 
-module.exports = { queryUpdateCart };
+module.exports = { queryRemoveFromCart };
