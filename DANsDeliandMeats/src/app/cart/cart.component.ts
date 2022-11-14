@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AppService } from '../app.service';
+import { NotifierService } from '../notifier.service';
 
 @Component({
   selector: 'app-cart',
@@ -8,10 +9,11 @@ import { AppService } from '../app.service';
 })
 export class CartComponent implements OnInit {
 
-  constructor(public appService:AppService) { }
+  constructor(public appService:AppService,
+    private notifierService:NotifierService) { }
 
-  displayedColumns: string[] = ['Product', 'Price', 'Quantity', 'AddToCart'];
-  hasItems = false;
+  displayedColumns: string[] = ['Product', 'Price', 'Quantity', 'Edit'];
+  hasItems = true;
   cartResults:any = ['false'];
 
   ngOnInit(): void {
@@ -21,8 +23,20 @@ export class CartComponent implements OnInit {
     };
 
     this.appService.GetCart(body).subscribe( response => {
+      console.log(response[0]);
+      this.cartResults = response[0];
+    });
+  }
+
+  checkout(){
+    var body = {
+      'id' : localStorage.getItem('id')
+    };
+    this.appService.DropCart(body).subscribe( response => {
       console.log(response);
     });
+    this.notifierService.showNotification('Purchase Complete!', 'OK', 'success');
+    this.cartResults = [];
   }
 }
 
