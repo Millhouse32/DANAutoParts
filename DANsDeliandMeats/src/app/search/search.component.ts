@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MatTableDataSource } from '@angular/material/table';
 import { AppService } from '../app.service';
 
 interface FilterProductType {
@@ -27,7 +28,7 @@ export class SearchComponent implements OnInit {
    hasSearched = false;
    form: FormGroup = new FormGroup({});
    selectedOption = 'all';
-   searchResults = ['false'];
+   searchResults:any = ['false'];
    displayedColumns: string[] = ['Product', 'Price', 'Quantity', 'AddToCart'];
 
   constructor(
@@ -120,6 +121,15 @@ export class SearchComponent implements OnInit {
       this.appService.AddToCart(body).subscribe(response => {
         console.log(response);
       });
+      
+      for(let i=0; i<this.searchResults.length; i++) {
+        if (this.searchResults[i]['PLU'] == val['PLU']) {
+          var index = i;
+          this.searchResults.splice(index, 1);
+          this.searchResults = new MatTableDataSource(this.searchResults);
+        }
+      }
+
       this.tempCart.push(body); 
     }
     }
