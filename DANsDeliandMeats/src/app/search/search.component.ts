@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatTableDataSource } from '@angular/material/table';
 import { AppService } from '../app.service';
+import { NotifierService } from '../notifier.service';
 
 interface FilterProductType {
   value: string;
@@ -33,7 +34,8 @@ export class SearchComponent implements OnInit {
 
   constructor(
     private formBuilder: FormBuilder,
-    public appService: AppService
+    public appService: AppService,
+    private notifierService:NotifierService
   ) { 
     this.form = formBuilder.group({
       search: [null, [Validators.required]],
@@ -120,15 +122,20 @@ export class SearchComponent implements OnInit {
       };
       this.appService.AddToCart(body).subscribe(response => {
         console.log(response);
+        this.notifierService.showNotification(val['Item'] + ' has been added to your cart!', 'OK', 'success');
+
       });
+      var id = val['PLU'];
+
+      (<HTMLInputElement>document.getElementById(id)).value = '';
       
-      for(let i=0; i<this.searchResults.length; i++) {
-        if (this.searchResults[i]['PLU'] == val['PLU']) {
-          var index = i;
-          this.searchResults.splice(index, 1);
-          this.searchResults = new MatTableDataSource(this.searchResults);
-        }
-      }
+      // for(let i=0; i<this.searchResults.length; i++) {
+      //   if (this.searchResults[i]['PLU'] == val['PLU']) {
+      //     var index = i;
+      //     this.searchResults.splice(index, 1);
+      //     this.searchResults = new MatTableDataSource(this.searchResults);
+      //   }
+      // }
 
       this.tempCart.push(body); 
     }
