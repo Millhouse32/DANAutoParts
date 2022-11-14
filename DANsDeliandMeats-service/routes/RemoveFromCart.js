@@ -1,6 +1,6 @@
 var express = require('express');
 var dbRemoveFromCart = require('../public/javascripts/DbRemoveFromCart');
-var router = express.router();
+var router = express.Router();
 
 router.post('/', function(req, res, next) {
 
