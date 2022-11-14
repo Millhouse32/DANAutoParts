@@ -111,11 +111,15 @@ export class SearchComponent implements OnInit {
       var quantity = input.value;
       if (quantity != "") {
       var body = {
-        'Price' : val['Price'],
-        'Product' : val['Item'],
+        'id' : localStorage.getItem('id'),
         'PLU' : val['PLU'],
-        'Quantity' : quantity
+        'item' : val['Item'],
+        'quantity' : quantity,
+        'price' : val['Price'],
       };
+      this.appService.AddToCart(body).subscribe(response => {
+        console.log(response);
+      });
       this.tempCart.push(body); 
     }
     }
