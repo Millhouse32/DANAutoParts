@@ -12,7 +12,7 @@ export class CartComponent implements OnInit {
   constructor(public appService:AppService,
     private notifierService:NotifierService) { }
 
-  displayedColumns: string[] = ['Product', 'Price', 'Quantity', 'Edit'];
+  displayedColumns: string[] = ['Product', 'Price', 'Quantity', 'Remove'];
   hasItems = true;
   cartResults:any = ['false'];
 
