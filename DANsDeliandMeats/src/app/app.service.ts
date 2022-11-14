@@ -87,7 +87,11 @@ export class AppService {
   }
 
   AddToCart(body:any):Observable<any> {
-    return this.httpClient.post('http://localhost:3000/AddToCart', body)
+    return this.httpClient.post('http://localhost:3000/AddToCart', body);
+  }
+
+  GetCart(body:any):Observable<any> {
+    return this.httpClient.post('http://localhost:3000/GetCart', body);
   }
 
 

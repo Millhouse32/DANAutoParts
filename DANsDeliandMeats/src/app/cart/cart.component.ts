@@ -10,6 +10,19 @@ export class CartComponent implements OnInit {
 
   constructor(public appService:AppService) { }
 
-  ngOnInit(): void {}
+  displayedColumns: string[] = ['Product', 'Price', 'Quantity', 'AddToCart'];
+  hasItems = false;
+  cartResults:any = ['false'];
+
+  ngOnInit(): void {
+
+    var body = {
+      id: localStorage.getItem('id')
+    };
+
+    this.appService.GetCart(body).subscribe( response => {
+      console.log(response);
+    });
+  }
 }
 
