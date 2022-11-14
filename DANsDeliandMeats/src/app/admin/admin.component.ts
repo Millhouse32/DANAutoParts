@@ -243,6 +243,7 @@ export class AdminComponent implements OnInit {
           console.log(response);
           if (response['success'] == true) {
             this.notifierService.showNotification('Price Updated!', 'OK', 'success');
+            this.currentPrice = this.changePriceForm.value['price'];
           }
         },
         error => {
