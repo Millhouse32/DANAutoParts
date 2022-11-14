@@ -5,6 +5,7 @@ import { ModalService } from '../_modal';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { NotifierService } from '../notifier.service';
+import { JsonPipe } from '@angular/common';
 
 
 interface MeatType {
@@ -100,10 +101,12 @@ export class AdminComponent implements OnInit {
     const connection = webSocket('ws://localhost:9292');
 
     connection.subscribe();
-
-    connection.next({tablename: 'hello world'});
-
-
+    var resp = {};
+    this.appService.GetAllBeef().subscribe( response => {
+      resp = response;
+      var temp = JSON.parse(JSON.stringify(resp));
+      connection.next(temp);
+    });
   }
 
   onGrantAccess() {
