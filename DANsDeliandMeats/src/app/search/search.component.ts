@@ -122,6 +122,19 @@ export class SearchComponent implements OnInit {
       };
       this.appService.AddToCart(body).subscribe(response => {
         console.log(response);
+        if (response['code'] == 'ER_NO_SUCH_TABLE') {
+          var createCartBody = {
+            'id' : localStorage.getItem('id')
+          };
+          this.appService.CreateCart(createCartBody).subscribe(response => {
+            console.log(response);
+          });
+          setTimeout(() => this.appService.AddToCart(body).subscribe(response => {
+            console.log(response);
+          }), 1000);
+
+        }
+
         this.notifierService.showNotification(val['Item'] + ' has been added to your cart!', 'OK', 'success');
 
       });
