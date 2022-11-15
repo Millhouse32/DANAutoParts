@@ -14,6 +14,7 @@ export class CartComponent implements OnInit {
   form: FormGroup = new FormGroup({});
 
   currentQuantity: any;
+  currentPLU: any;
 
   constructor(public appService:AppService,
     private notifierService:NotifierService,
@@ -65,12 +66,26 @@ export class CartComponent implements OnInit {
   }
 
   edit(PLU:any, Quantity:any) {
+    this.form.reset();
     this.currentQuantity = Quantity;
+    this.currentPLU = PLU;
     this.modalService.open('EditQuantity');
   }
 
   submitNewQuantity(){
-
+    
+    var body = {
+      id : localStorage.getItem('id'),
+      PLU : this.currentPLU,
+      quantity : this.form.value['quantity']
+    };
+    
+    this.appService.UpdateCart(body).subscribe ( response => {
+      console.log(response);
+      this.cartResults = response[0];
+      this.notifierService.showNotification('Quantity Updated!', 'OK', 'success');
+      this.modalService.close('EditQuantity');
+    });
   }
 }
 
