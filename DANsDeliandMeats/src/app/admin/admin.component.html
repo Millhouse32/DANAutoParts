@@ -144,7 +144,7 @@
               </mat-error>
             </mat-form-field>
             <br>
-            <button class="test" mat-raised-button color="primary" (click)="openReportGenerator()">WebSocket</button>
+            <button class="test" style="margin-left: 75px;" mat-raised-button color="primary" (click)="openReportGenerator()">Reports</button>
             </form>
           </div>
           </div>
@@ -174,7 +174,7 @@
 
 <jw-modal id="GenerateReports">
   <div class="container">
- <form class="form-class" [formGroup]="grantAccessForm" (submit)="submit()">
+ <form class="form-class" [formGroup]="grantAccessForm" (submit)="onSend()">
    <h1>Generate Report</h1>
    <mat-form-field appearance="fill">
     <mat-label>Product Type</mat-label>

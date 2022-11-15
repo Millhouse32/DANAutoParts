@@ -139,6 +139,9 @@ export class AdminComponent implements OnInit {
         connection.next(send); }, 1000);
       });
     }
+    this.modalService.close('GenerateReports');
+    this.notifierService.showNotification('Your report has been generated!', 'OK', 'success');
+
   }
 
   onGrantAccess() {
