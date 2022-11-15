@@ -8,7 +8,6 @@
             Admin Users
           </mat-card-title>
         </mat-card-header>
-        <button (click)="onSend()">WebSocket</button>
         <mat-card-content>
 <div class="table-container">
 <table mat-table [dataSource]="adminUsers">
@@ -145,6 +144,7 @@
               </mat-error>
             </mat-form-field>
             <br>
+            <button (click)="openReportGenerator()">WebSocket</button>
             </form>
           </div>
           </div>
@@ -170,4 +170,24 @@
       <button class="test" mat-raised-button color="primary" type="submit">Submit</button>
     </form>
     </div>
+</jw-modal>
+
+<jw-modal id="GenerateReports">
+  <div class="container">
+ <form class="form-class" [formGroup]="grantAccessForm" (submit)="submit()">
+   <h1>Generate Report</h1>
+   <mat-form-field appearance="fill">
+    <mat-label>Product Type</mat-label>
+    <mat-select formControlName="product" (valueChange)="reportValue($event)">
+      <mat-option *ngFor="let meat of meatType" [value]="meat.value">
+        {{meat.viewValue}}
+      </mat-option>
+    </mat-select>
+    <mat-error *ngIf="form.get('meatType')?.hasError('required')">
+      Please select a product type
+    </mat-error>
+  </mat-form-field>
+   <button class="test" mat-raised-button color="primary" type="submit">Submit</button>
+ </form>
+ </div>
 </jw-modal>

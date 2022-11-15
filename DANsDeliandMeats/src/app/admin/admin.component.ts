@@ -31,6 +31,7 @@ interface ChangePriceType {
 
 export class AdminComponent implements OnInit {
 
+  reportVal: any;
   grantAccessForm: any;
   emailRegx = /^(([^<>+()\[\]\\.,;:\s@"-#$%&=]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,3}))$/;
   adminUsers = [];
@@ -102,10 +103,12 @@ export class AdminComponent implements OnInit {
 
     connection.subscribe();
     var resp = {};
-    this.appService.GetAllBeef().subscribe( response => {
+    this.appService.GetAllPork().subscribe( response => {
       resp = response;
-      var temp = JSON.parse(JSON.stringify(resp));
-      connection.next(temp);
+      connection.next("filename:pork");
+
+      setTimeout(() => { var send = JSON.parse(JSON.stringify(resp));
+      connection.next(send); }, 1000);
     });
   }
 
@@ -234,6 +237,11 @@ export class AdminComponent implements OnInit {
       this.currentPrice = event['price'];
     }
 
+    reportValue(event: any) {
+      this.reportVal = event;
+      console.log(this.reportVal);
+    }
+
     changePriceSubmit(){
       console.log(this.changePriceForm.value);
       var body = {
@@ -253,5 +261,9 @@ export class AdminComponent implements OnInit {
           console.log(error);
         }
       )
+    }
+
+    openReportGenerator(){
+      this.modalService.open('GenerateReports');
     }
 }
