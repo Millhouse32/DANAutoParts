@@ -38,5 +38,17 @@ export class CartComponent implements OnInit {
     this.notifierService.showNotification('Purchase Complete!', 'OK', 'success');
     this.cartResults = [];
   }
+
+  removeFromCart(inPLU: any) {
+    var body = {
+      id : localStorage.getItem('id'),
+      PLU : inPLU
+    };
+
+    this.appService.RemoveFromCart(body).subscribe( response => {
+      console.log(response);
+      this.cartResults = response[0];
+    });
+  }
 }
 

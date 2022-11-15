@@ -106,6 +106,10 @@ export class AppService {
     return this.httpClient.get('http://localhost:3000/GetAllProducts');
   }
 
+  RemoveFromCart(body:any):Observable<any> {
+    return this.httpClient.post('http://localhost:3000/RemoveFromCart', body);
+  }
+
 
   public passFirstName = new BehaviorSubject<any>(""); 
   readonly passFirstNames$ = this.passFirstName.asObservable();
