@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { AppService } from '../app.service';
 import { NotifierService } from '../notifier.service';
+import { ModalService } from '../_modal';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-cart',
@@ -9,8 +11,19 @@ import { NotifierService } from '../notifier.service';
 })
 export class CartComponent implements OnInit {
 
+  form: FormGroup = new FormGroup({});
+
+  currentQuantity: any;
+
   constructor(public appService:AppService,
-    private notifierService:NotifierService) { }
+    private notifierService:NotifierService,
+    public modalService:ModalService,
+    private formBuilder: FormBuilder) { 
+
+      this.form = formBuilder.group({
+        quantity: [null, Validators.required]
+    })
+    }
 
   displayedColumns: string[] = ['Product', 'Price', 'Quantity', 'Remove'];
   hasItems = true;
@@ -49,6 +62,15 @@ export class CartComponent implements OnInit {
       console.log(response);
       this.cartResults = response[0];
     });
+  }
+
+  edit(PLU:any, Quantity:any) {
+    this.currentQuantity = Quantity;
+    this.modalService.open('EditQuantity');
+  }
+
+  submitNewQuantity(){
+
   }
 }
 
