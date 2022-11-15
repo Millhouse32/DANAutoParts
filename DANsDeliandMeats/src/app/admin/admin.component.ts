@@ -98,18 +98,47 @@ export class AdminComponent implements OnInit {
 
   onSend(){
 
-    this.appService.passFirstName.next("HELLO WORLD");
     const connection = webSocket('ws://localhost:9292');
 
     connection.subscribe();
     var resp = {};
-    this.appService.GetAllPork().subscribe( response => {
-      resp = response;
-      connection.next("filename:pork");
 
-      setTimeout(() => { var send = JSON.parse(JSON.stringify(resp));
-      connection.next(send); }, 1000);
-    });
+    if(this.reportVal == 'general') {
+      this.appService.GetAllProducts().subscribe( response => {
+        resp = response;
+        connection.next('filename:general');
+
+        setTimeout(() => { var send = JSON.parse(JSON.stringify(resp));
+        connection.next(send); }, 1000);
+      });
+    }
+    else if (this.reportVal == 'beef') {
+      this.appService.GetAllBeef().subscribe( response => {
+        resp = response;
+        connection.next('filename:beef');
+
+        setTimeout(() => { var send = JSON.parse(JSON.stringify(resp));
+        connection.next(send); }, 1000);
+      });
+    }
+    else if (this.reportVal == 'pork') {
+      this.appService.GetAllPork().subscribe( response => {
+        resp = response;
+        connection.next('filename:pork');
+
+        setTimeout(() => { var send = JSON.parse(JSON.stringify(resp));
+        connection.next(send); }, 1000);
+      });
+    }
+    else if (this.reportVal == 'chicken') {
+      this.appService.GetAllChicken().subscribe( response => {
+        resp = response;
+        connection.next('filename:chicken');
+
+        setTimeout(() => { var send = JSON.parse(JSON.stringify(resp));
+        connection.next(send); }, 1000);
+      });
+    }
   }
 
   onGrantAccess() {
