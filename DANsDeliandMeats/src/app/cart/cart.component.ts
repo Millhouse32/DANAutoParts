@@ -45,7 +45,9 @@ export class CartComponent implements OnInit {
   checkout(){
 
     this.cartResults.array.forEach(element => {
-      var value = element.Quantity
+      
+      
+
       var poundsBody = {
         PLU : element.PLU,
         val : element.Quantity 
