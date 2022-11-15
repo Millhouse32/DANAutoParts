@@ -40,13 +40,15 @@
   <jw-modal id="EditQuantity">
     <form [formGroup]="form" (ngSubmit)="submitNewQuantity()">
       <div style="text-align: center;">
-        <mat-label>Current Quantity: {{currentQuantity}} </mat-label>
+        <mat-label>Current Quantity: {{currentQuantity}} lbs. </mat-label>
         <mat-form-field>
-          <mat-label>New Quantity</mat-label>
+          <mat-label>New Quantity (lbs.)</mat-label>
           <input type="number" matInput formControlName="quantity">
         </mat-form-field>
         <br>
-        <button style="margin-right: 50px;" mat-raised-button color="primary">Submit</button>
+        <div style="margin-left: 45px">
+          <button style="margin-right: 50px;" mat-raised-button color="primary">Submit</button>
+        </div>
       </div>
       <br>
       </form>
