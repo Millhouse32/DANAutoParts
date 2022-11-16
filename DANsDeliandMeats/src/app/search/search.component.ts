@@ -105,6 +105,8 @@ export class SearchComponent implements OnInit {
 
   filterChange(event: any) {
     this.selectedOption = event;
+    if (this.searchTerm != '')
+      this.submit();
   }
 
   AddToTempCart(val: any) {
