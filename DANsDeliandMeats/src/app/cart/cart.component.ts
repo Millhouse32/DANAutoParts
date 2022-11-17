@@ -38,7 +38,7 @@ export class CartComponent implements OnInit {
 
     this.appService.GetCart(body).subscribe( response => {
       console.log(response[0]);
-      if (response[0] != undefined)
+      if (response[0].length != 0)
         this.cartResults = response[0];
       else {
         this.cartResults = ['empty'];
@@ -106,8 +106,11 @@ export class CartComponent implements OnInit {
     };
 
     this.appService.RemoveFromCart(body).subscribe( response => {
-      console.log(response);
-      this.cartResults = response[0];
+      if (response[0].length != 0)
+        this.cartResults = response[0];
+      else {
+        this.cartResults = ['empty'];
+      }
     });
   }
 
