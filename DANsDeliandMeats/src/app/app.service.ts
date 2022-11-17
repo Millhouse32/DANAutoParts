@@ -114,6 +114,10 @@ export class AppService {
     return this.httpClient.post('http://localhost:3000/UpdateCart', body);
   }
 
+  GetPoundsSold(body:any):Observable<any> {
+    return this.httpClient.post('http://localhost:3000/GetPoundsSold', body);
+  }
+
 
   public passFirstName = new BehaviorSubject<any>(""); 
   readonly passFirstNames$ = this.passFirstName.asObservable();

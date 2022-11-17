@@ -30,6 +30,7 @@ var removeFromCartRouter = require('./routes/RemoveFromCart');
 var getCartRouter = require('./routes/GetCart');
 var updatePoundsSoldRouter = require('./routes/UpdatePoundsSold');
 var getAllProductsRouter = require('./routes/GetAllProducts');
+var getPoundsSoldRouter = require('./routes/GetPoundsSold');
 var cors = require('cors');
 
 var app = express();
@@ -71,6 +72,7 @@ app.use('/RemoveFromCart', removeFromCartRouter);
 app.use('/GetCart', getCartRouter);
 app.use('/UpdatePoundsSold', updatePoundsSoldRouter);
 app.use('/GetAllProducts', getAllProductsRouter);
+app.use('/GetPoundsSold', getPoundsSoldRouter);
 
 
 // catch 404 and forward to error handler

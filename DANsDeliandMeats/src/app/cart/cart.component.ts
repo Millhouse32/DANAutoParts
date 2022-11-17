@@ -44,6 +44,14 @@ export class CartComponent implements OnInit {
 
   checkout(){
 
+    console.log(this.cartResults);
+    this.cartResults.forEach(element => {
+      console.log(element.PLU);
+
+      
+
+    })
+
     this.cartResults.array.forEach(element => {
       
       
@@ -58,14 +66,14 @@ export class CartComponent implements OnInit {
       })
     });
 
-    var body = {
-      'id' : localStorage.getItem('id')
-    };
-    this.appService.DropCart(body).subscribe( response => {
-      console.log(response);
-    });
-    this.notifierService.showNotification('Purchase Complete!', 'OK', 'success');
-    this.cartResults = [];
+    // var body = {
+    //   'id' : localStorage.getItem('id')
+    // };
+    // this.appService.DropCart(body).subscribe( response => {
+    //   console.log(response);
+    // });
+    // this.notifierService.showNotification('Purchase Complete!', 'OK', 'success');
+    // this.cartResults = [];
   }
 
   removeFromCart(inPLU: any) {
