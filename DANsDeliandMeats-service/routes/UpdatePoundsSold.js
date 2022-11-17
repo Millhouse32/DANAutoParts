@@ -4,7 +4,7 @@ var router = express.Router();
 
 router.post('/', function(req, res, next) {
 
-    dbUpdatePoundsSold.queryUpdatePoundsSold(req['body']['PLU'], req['body']['value'])
+    dbUpdatePoundsSold.queryUpdatePoundsSold(req['body']['PLU'], req['body']['val'])
     .then(response => {
         res.json(response);
     }).catch(error => {

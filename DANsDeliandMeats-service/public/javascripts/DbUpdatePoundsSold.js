@@ -23,12 +23,12 @@ connection.connect(function(err) {
     connected = true;
 });
 
-async function queryUpdatePoundsSold(PLU, value) {
+async function queryUpdatePoundsSold(PLU, val) {
     if (connection) {
         let jsonResponse = { };
         jsonResponse = await new Promise (function(resolve, reject) {
             let sql = 'CALL UpdatePoundsSold(?,?)';
-            connection.query(sql, [PLU, value], function(err, rows) {
+            connection.query(sql, [PLU, val], function(err, rows) {
                 if (err) {
                     console.log(err);
                     jsonResponse = err;

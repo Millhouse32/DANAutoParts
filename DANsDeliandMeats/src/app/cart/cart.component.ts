@@ -48,32 +48,51 @@ export class CartComponent implements OnInit {
     this.cartResults.forEach(element => {
       console.log(element.PLU);
 
-      
-
-    })
-
-    this.cartResults.array.forEach(element => {
-      
-      
-
-      var poundsBody = {
-        PLU : element.PLU,
-        val : element.Quantity 
+      var getPoundsSoldBody = {
+        PLU : element.PLU
       };
-      
-      this.appService.UpdatePoundsSold(poundsBody).subscribe ( response => {
-        console.log(response); 
-      })
+
+      this.appService.GetPoundsSold(getPoundsSoldBody).subscribe( response => {
+
+        var currentPoundsSold;
+
+        if (response[0].length != 0){
+          currentPoundsSold = response[0][0]['PoundsSold'];
+          console.log(response[0]);
+        }
+        else if (response[1].length != 0) {
+          currentPoundsSold = response[1][0]['PoundsSold'];
+          console.log(response[1]);
+        }
+        else {
+          currentPoundsSold = response[2][0]['PoundsSold'];
+          console.log(response[2]);
+        }
+        var newPoundsSold = currentPoundsSold + element.Quantity;
+        console.log("new pounds sold :: " + newPoundsSold);
+
+        var updatePoundsSoldBody = {
+          "PLU" : element.PLU,
+          "val" : Number(newPoundsSold)
+        }
+
+        console.log(updatePoundsSoldBody);
+         this.appService.UpdatePoundsSold(updatePoundsSoldBody).subscribe( response => {
+           console.log(response);
+         });
+      });
+
     });
 
-    // var body = {
-    //   'id' : localStorage.getItem('id')
-    // };
-    // this.appService.DropCart(body).subscribe( response => {
-    //   console.log(response);
-    // });
-    // this.notifierService.showNotification('Purchase Complete!', 'OK', 'success');
-    // this.cartResults = [];
+    setTimeout(() => {     var body = {
+      'id' : localStorage.getItem('id')
+    };
+    this.appService.DropCart(body).subscribe( response => {
+      console.log(response);
+    });
+    this.notifierService.showNotification('Purchase Complete!', 'OK', 'success');
+    this.cartResults = [];
+  }, 2000);
   }
 
   removeFromCart(inPLU: any) {
