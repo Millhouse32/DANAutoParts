@@ -28,7 +28,7 @@ export class CartComponent implements OnInit {
 
   displayedColumns: string[] = ['Product', 'Price', 'Quantity', 'Remove'];
   hasItems = true;
-  cartResults:any = ['false'];
+  cartResults:any = [];
 
   ngOnInit(): void {
 
@@ -38,7 +38,11 @@ export class CartComponent implements OnInit {
 
     this.appService.GetCart(body).subscribe( response => {
       console.log(response[0]);
-      this.cartResults = response[0];
+      if (response[0] != undefined)
+        this.cartResults = response[0];
+      else {
+        this.cartResults = ['empty'];
+      }
     });
   }
 
@@ -91,7 +95,7 @@ export class CartComponent implements OnInit {
       console.log(response);
     });
     this.notifierService.showNotification('Purchase Complete!', 'OK', 'success');
-    this.cartResults = [];
+    this.cartResults = ['empty'];
   }, 2000);
   }
 

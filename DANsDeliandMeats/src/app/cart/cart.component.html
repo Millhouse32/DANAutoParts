@@ -1,5 +1,6 @@
-<h1 style="margin-left: 150px; padding-top: 5%;">Cart</h1>
-<div class="table-container" *ngIf="hasItems">
+<h1 *ngIf="this.cartResults[0] != ['empty']" style="margin-left: 150px; padding-top: 5%;">Cart</h1>
+<h1 *ngIf="this.cartResults[0] == ['empty']" style="margin-left: 550px; padding-top: 5%;">Cart is empty!</h1>
+<div class="table-container" *ngIf="cartResults[0] != ['empty']">
     <table mat-table [dataSource]="cartResults">
 
       <!--- Note that these columns can be defined in any order.
@@ -33,7 +34,7 @@
     </table>
   </div>
   <br>
-  <div style="text-align: right; margin-right:250px">
+  <div style="text-align: right; margin-right:250px" *ngIf="this.cartResults[0] != 'empty'">
     <button mat-raised-button color="primary" (click)="checkout()">Checkout</button>
   </div>
 
